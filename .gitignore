@@ -1,0 +1,4 @@
+.idea
+src/main/resources/dbconfig.properties
+mbg.xml
+target
