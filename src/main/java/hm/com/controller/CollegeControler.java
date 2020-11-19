@@ -35,6 +35,7 @@ public class CollegeControler {
     CollegeService collegeService;
 
     //分页展示部门信息
+    //localhost:8080/api/ college
     @RequestMapping("")
     @ResponseBody
     public ReturnMessage getCollege(@RequestParam(value = "page",defaultValue = "1")Integer page, @RequestParam(value = "limit",defaultValue = "10")Integer limit){
@@ -48,6 +49,7 @@ public class CollegeControler {
     }
 
     //获取所有的部门信息
+    //localhost:8080/api/ college/all
     @RequestMapping("/all")
     @ResponseBody
     public ReturnMessage getAllCollege(){
