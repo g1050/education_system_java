@@ -2,7 +2,10 @@ package hm.com.service;
 
 import hm.com.bean.Manager;
 import hm.com.dao.ManagerMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author ：sky
@@ -11,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @modified By：
  * @version: 0.1$
  */
+//service -> mapper
+@Service
 public class ManagerService {
     @Autowired
     ManagerMapper managerMapper;
@@ -18,4 +23,17 @@ public class ManagerService {
     public void saveMangager(Manager manager) {
         managerMapper.insertSelective(manager);
     }
+
+    //service层
+    public List<Manager> getAll() {
+        //1.从数据库查询数据
+        List<Manager> list = managerMapper.selectByExample(null);
+        //2.返回给Controller层
+        return list;
+    }
+
+//    public List<Manager> getAll() {
+//        return managerMapper.selectByExample(null);
+//    }
+
 }

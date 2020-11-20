@@ -1,15 +1,15 @@
 package hm.com.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import hm.com.bean.Manager;
 import hm.com.bean.ReturnMessage;
 import hm.com.service.ManagerService;
-import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author ：sky
@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/manager")
 public class ManagerController {
 
-//    @Autowired
-//    ManagerService managerService;
+    @Autowired
+    ManagerService managerService;
 
-    //localhost:8080/manager/test get
+    //localhost:8080/manager/test  GET
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage test(){
@@ -48,4 +48,31 @@ public class ManagerController {
         //managerService.saveMangager(manager);
         return null;
     }
+
+    //获取全部管理员(分页展示)
+    //localhost:8080/api/manager GET
+    //controller -> service -> mapper
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnMessage getManager(){
+        //查询数据库,获取需要的信息
+        List<Manager> data = managerService.getAll();
+        //把lisst信息add到returnMessage后面
+        return ReturnMessage.success().add("pageInfo",data);
+        //code = 0 message = "成功" extend= { PageinfO 数组(list)}
+    }
+
+    //获取全部管理员(分页展示)
+//    @RequestMapping("")
+//    @ResponseBody
+//    public ReturnMessage getCollege(@RequestParam(value = "page",defaultValue = "1")Integer page, @RequestParam(value = "limit",defaultValue = "10")Integer limit){
+//        //引入pageHelper插件
+//        PageHelper.startPage(page,limit);
+//        //查询
+//        List<Manager> list = managerService.getAll();
+//        //pageInfo包装,第二个参数连续显示的页数
+//        PageInfo pageInfo = new PageInfo(list,5);
+//        return  ReturnMessage.success().add("pageInfo",pageInfo);
+//    }
+
 }

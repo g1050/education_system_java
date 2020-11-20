@@ -2,6 +2,7 @@ package test;
 
 import java.util.List;
 import hm.com.bean.College;
+import hm.com.bean.Manager;
 import hm.com.dao.CollegeMapper;
 import hm.com.dao.ManagerMapper;
 import org.junit.Test;
@@ -20,6 +21,7 @@ public class MapperTest {
 	@Autowired
 	ManagerMapper managerMapper;
 	@Test
+
 	//测试学院信息
 	public void testCollegeMapper() {
 //		//1.创建springIOC容器
@@ -42,9 +44,10 @@ public class MapperTest {
 //		System.out.println(c);
 //		managerMapper.insertSelective(m);
 
-		List<College> list = collegeMapper.selectByExample(null);
-		for( College college : list){
-			System.out.println(college.getPresident());
+//		System.out.println(collegeMapper.selectByPrimaryKey(1).toString());
+		List<Manager> list = managerMapper.selectAll();
+		for( Manager manager : list){
+			System.out.println(manager.getUsername());
 		}
 	}
 	

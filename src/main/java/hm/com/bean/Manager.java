@@ -19,27 +19,7 @@ public class Manager {
 
     private Date createTime;
 
-    //学院信息
-    private College college;
-    
-    public Manager() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Manager(String username, String password, String sex, Integer collegeId, String avatarUrl, String email,
-			Date createTime) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.sex = sex;
-		this.collegeId = collegeId;
-		this.avatarUrl = avatarUrl;
-		this.email = email;
-		this.createTime = createTime;
-	}
-
-	public Integer getId() {
+    public Integer getId() {
         return id;
     }
 

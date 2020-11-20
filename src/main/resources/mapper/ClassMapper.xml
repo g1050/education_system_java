@@ -240,4 +240,243 @@
       college_id = #{collegeId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="BaseResultMap" type="hm.com.bean.Class">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="major_id" jdbcType="INTEGER" property="majorId" />
+    <result column="student_num" jdbcType="INTEGER" property="studentNum" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="director" jdbcType="VARCHAR" property="director" />
+    <result column="party_secretary" jdbcType="VARCHAR" property="partySecretary" />
+    <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, major_id, student_num, name, director, party_secretary, college_id
+  </sql>
+  <select id="selectByExample" parameterType="hm.com.bean.ClassExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from class
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from class
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from class
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="hm.com.bean.ClassExample">
+    delete from class
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="hm.com.bean.Class">
+    insert into class (id, major_id, student_num, 
+      name, director, party_secretary, 
+      college_id)
+    values (#{id,jdbcType=INTEGER}, #{majorId,jdbcType=INTEGER}, #{studentNum,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{director,jdbcType=VARCHAR}, #{partySecretary,jdbcType=VARCHAR}, 
+      #{collegeId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="hm.com.bean.Class">
+    insert into class
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="majorId != null">
+        major_id,
+      </if>
+      <if test="studentNum != null">
+        student_num,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="director != null">
+        director,
+      </if>
+      <if test="partySecretary != null">
+        party_secretary,
+      </if>
+      <if test="collegeId != null">
+        college_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="majorId != null">
+        #{majorId,jdbcType=INTEGER},
+      </if>
+      <if test="studentNum != null">
+        #{studentNum,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null">
+        #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="partySecretary != null">
+        #{partySecretary,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null">
+        #{collegeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="hm.com.bean.ClassExample" resultType="java.lang.Long">
+    select count(*) from class
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update class
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.majorId != null">
+        major_id = #{record.majorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentNum != null">
+        student_num = #{record.studentNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.director != null">
+        director = #{record.director,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partySecretary != null">
+        party_secretary = #{record.partySecretary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collegeId != null">
+        college_id = #{record.collegeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update class
+    set id = #{record.id,jdbcType=INTEGER},
+      major_id = #{record.majorId,jdbcType=INTEGER},
+      student_num = #{record.studentNum,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      director = #{record.director,jdbcType=VARCHAR},
+      party_secretary = #{record.partySecretary,jdbcType=VARCHAR},
+      college_id = #{record.collegeId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="hm.com.bean.Class">
+    update class
+    <set>
+      <if test="majorId != null">
+        major_id = #{majorId,jdbcType=INTEGER},
+      </if>
+      <if test="studentNum != null">
+        student_num = #{studentNum,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null">
+        director = #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="partySecretary != null">
+        party_secretary = #{partySecretary,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null">
+        college_id = #{collegeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hm.com.bean.Class">
+    update class
+    set major_id = #{majorId,jdbcType=INTEGER},
+      student_num = #{studentNum,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      director = #{director,jdbcType=VARCHAR},
+      party_secretary = #{partySecretary,jdbcType=VARCHAR},
+      college_id = #{collegeId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

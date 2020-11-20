@@ -6,6 +6,8 @@
 	<settings>
 		<!-- 全局配置驼峰命名规则 -->
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+
+		<setting name="logImpl" value="STDOUT_LOGGING" />
 	</settings>
 
 	<typeAliases>
@@ -19,5 +21,6 @@
 	</plugins>
 	<mappers>
 		<mapper resource="mapper/CollegeMapper.xml"></mapper>
+		<mapper resource="mapper/ManagerMapper.xml"></mapper>
 	</mappers>
 </configuration>

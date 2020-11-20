@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hm.com.dao.ManagerMapper">
+
   <resultMap id="BaseResultMap" type="hm.com.bean.Manager">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
@@ -11,24 +12,7 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="create_time" jdbcType="DATE" property="createTime" />
   </resultMap>
-  
-  <resultMap id="WithCollegeResultMap" type="hm.com.bean.Manager">
-  	<id column="id" jdbcType="INTEGER" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="sex" jdbcType="CHAR" property="sex" />
-    <result column="college_id" jdbcType="INTEGER" property="collegeId" />
-    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="create_time" jdbcType="DATE" property="createTime" />
-    
-    <!-- 对结果集封装,指定联合查询部门字段的封装 -->
-    <association property="college" javaType="hm.com.bean.College">
-    	<id column="id" property="id"/>
-    	<id column="name" property="name"/>
-    </association>
-  </resultMap>
-  
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -58,6 +42,7 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Update_By_Example_Where_Clause">
     <where>
       <foreach collection="example.oredCriteria" item="criteria" separator="or">
@@ -90,39 +75,7 @@
   <sql id="Base_Column_List">
     id, username, password, sex, college_id, avatar_url, email, create_time
   </sql>
-  
-  <sql id="WithCollege_Column_List">
-  	m.id, m.username, m.password, m.sex, m.college_id, m.avatar_url, email, m.create_time,c.id,c.name
-  </sql>
-  
-  <!-- 自定义查询 
-  
-  List<Manager> selectByExampleWithCollege(ManagerExample example);
 
-    Manager selectByPrimaryKeyWithCollege(Integer id);-->
-  <!-- 含有学院信息的管理员信息 -->
-  <select id="selectByExampleWithCollege">
-  	select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    <!-- 修改 -->
-    FROM `manager` m LEFT JOIN college c ON m.`id` = c.`id`
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKeyWithCollege">
-  	select 
-    <include refid="WithCollege_Column_List" />
-    FROM `manager` m LEFT JOIN college c ON m.`id` = c.`id`
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  
   <select id="selectByExample" parameterType="hm.com.bean.ManagerExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -143,6 +96,11 @@
     from manager
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from manager
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from manager
     where id = #{id,jdbcType=INTEGER}
