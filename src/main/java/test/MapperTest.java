@@ -45,10 +45,10 @@ public class MapperTest {
 //		managerMapper.insertSelective(m);
 
 //		System.out.println(collegeMapper.selectByPrimaryKey(1).toString());
-		List<Manager> list = managerMapper.selectAll();
-		for( Manager manager : list){
-			System.out.println(manager.getUsername());
-		}
+//		List<Manager> list = managerMapper.selectAll();
+//		for( Manager manager : list){
+//			System.out.println(manager.getUsername());
+//		}
 	}
 	
 }
