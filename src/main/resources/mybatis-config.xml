@@ -22,5 +22,7 @@
 	<mappers>
 		<mapper resource="mapper/CollegeMapper.xml"></mapper>
 		<mapper resource="mapper/ManagerMapper.xml"></mapper>
+		<mapper resource="mapper/MajorMapper.xml"></mapper>
+		<mapper resource="mapper/DomnitoryMapper.xml"></mapper>
 	</mappers>
 </configuration>
