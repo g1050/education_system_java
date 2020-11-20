@@ -27,12 +27,19 @@ public class ManagerController {
 //    @Autowired
 //    ManagerService managerService;
 
-    //localhost:8080/manager/test
+    //localhost:8080/manager/test get
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage test(){
+        //查询数据库，获取全部管理员信息
 
-        return ReturnMessage.success().add("name","张军").add("数据","想要的数据");
+        //把管理员信息返回给前端
+
+        return ReturnMessage.success().add("name","张军").add("数据","想要的数据").add("pageInfo","PageInfo对象");
+        //code = 0
+        //message = "成功"
+        //extend k:name v:zj
+        //k:数据 v:...
     }
 
     //添加管理员
