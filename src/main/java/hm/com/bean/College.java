@@ -1,41 +1,19 @@
 package hm.com.bean;
 
-import org.hibernate.validator.constraints.Length;
-import org.junit.runners.Parameterized;
-
-import javax.validation.constraints.Pattern;
-
 public class College {
     private Integer id;
 
-    //可以验证中文
-    @Length(min = 1,max=30,message = "学院名字长度30字符以内")
     private String name;
 
     private String location;
 
-    @Pattern(regexp = "正则" )
     private Integer majorNum;
 
     private String president;
 
     private String phone;
 
-    public College() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public College(String name, String location, Integer majorNum, String president, String phone) {
-		super();
-		this.name = name;
-		this.location = location;
-		this.majorNum = majorNum;
-		this.president = president;
-		this.phone = phone;
-	}
-
-	public Integer getId() {
+    public Integer getId() {
         return id;
     }
 

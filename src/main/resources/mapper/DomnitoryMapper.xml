@@ -240,14 +240,7 @@
       member = #{member,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <resultMap id="BaseResultMap" type="hm.com.bean.Domnitory">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="building" jdbcType="VARCHAR" property="building" />
-    <result column="room" jdbcType="INTEGER" property="room" />
-    <result column="number" jdbcType="INTEGER" property="number" />
-    <result column="director" jdbcType="VARCHAR" property="director" />
-    <result column="member" jdbcType="INTEGER" property="member" />
-  </resultMap>
+
+
 
 </mapper>

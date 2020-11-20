@@ -18,8 +18,6 @@ public interface ManagerMapper {
 
     List<Manager> selectByExample(ManagerExample example);
 
-    List<Manager> selectAll();
-
     Manager selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Manager record, @Param("example") ManagerExample example);
@@ -29,4 +27,6 @@ public interface ManagerMapper {
     int updateByPrimaryKeySelective(Manager record);
 
     int updateByPrimaryKey(Manager record);
+
+    List<Manager> selectAll();
 }

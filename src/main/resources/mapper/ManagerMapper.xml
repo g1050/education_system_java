@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hm.com.dao.ManagerMapper">
-
   <resultMap id="BaseResultMap" type="hm.com.bean.Manager">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
@@ -12,7 +11,6 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="create_time" jdbcType="DATE" property="createTime" />
   </resultMap>
-
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -42,7 +40,6 @@
       </foreach>
     </where>
   </sql>
-
   <sql id="Update_By_Example_Where_Clause">
     <where>
       <foreach collection="example.oredCriteria" item="criteria" separator="or">
@@ -75,7 +72,6 @@
   <sql id="Base_Column_List">
     id, username, password, sex, college_id, avatar_url, email, create_time
   </sql>
-
   <select id="selectByExample" parameterType="hm.com.bean.ManagerExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -96,11 +92,6 @@
     from manager
     where id = #{id,jdbcType=INTEGER}
   </select>
-
-  <select id="selectAll" resultMap="BaseResultMap">
-    select * from manager
-  </select>
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from manager
     where id = #{id,jdbcType=INTEGER}
