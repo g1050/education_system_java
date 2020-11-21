@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="hm.com.dao.DomnitoryMapper">
-  <resultMap id="BaseResultMap" type="hm.com.bean.Domnitory">
+<mapper namespace="hm.com.dao.DormitoryMapper">
+  <resultMap id="BaseResultMap" type="hm.com.bean.Dormitory">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="building" jdbcType="VARCHAR" property="building" />
@@ -71,13 +71,13 @@
   <sql id="Base_Column_List">
     id, name, building, room, number, director, member
   </sql>
-  <select id="selectByExample" parameterType="hm.com.bean.DomnitoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="hm.com.bean.DormitoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from domnitory
+    from dormitory
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,29 +88,29 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from domnitory
+    from dormitory
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from domnitory
+    delete from dormitory
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="hm.com.bean.DomnitoryExample">
-    delete from domnitory
+  <delete id="deleteByExample" parameterType="hm.com.bean.DormitoryExample">
+    delete from dormitory
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="hm.com.bean.Domnitory">
-    insert into domnitory (id, name, building, 
+  <insert id="insert" parameterType="hm.com.bean.Dormitory">
+    insert into dormitory (id, name, building,
       room, number, director, 
       member)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{building,jdbcType=VARCHAR}, 
       #{room,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{director,jdbcType=VARCHAR}, 
       #{member,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="hm.com.bean.Domnitory">
-    insert into domnitory
+  <insert id="insertSelective" parameterType="hm.com.bean.Dormitory">
+    insert into dormitory
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -158,14 +158,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="hm.com.bean.DomnitoryExample" resultType="java.lang.Long">
-    select count(*) from domnitory
+  <select id="countByExample" parameterType="hm.com.bean.DormitoryExample" resultType="java.lang.Long">
+    select count(*) from dormitory
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update domnitory
+    update dormitory
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -194,7 +194,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update domnitory
+    update dormitory
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       building = #{record.building,jdbcType=VARCHAR},
@@ -206,8 +206,8 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="hm.com.bean.Domnitory">
-    update domnitory
+  <update id="updateByPrimaryKeySelective" parameterType="hm.com.bean.Dormitory">
+    update dormitory
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -230,8 +230,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="hm.com.bean.Domnitory">
-    update domnitory
+  <update id="updateByPrimaryKey" parameterType="hm.com.bean.Dormitory">
+    update dormitory
     set name = #{name,jdbcType=VARCHAR},
       building = #{building,jdbcType=VARCHAR},
       room = #{room,jdbcType=INTEGER},
