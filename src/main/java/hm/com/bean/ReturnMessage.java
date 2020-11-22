@@ -14,6 +14,7 @@ public class ReturnMessage {
     //0³É¹¦ 100Ê§°Ü
     private int code;
     private String Message;
+    //key:"test" value:123
     private Map<String,Object> extend = new HashMap<String,Object>();
 
     public static ReturnMessage success(){
