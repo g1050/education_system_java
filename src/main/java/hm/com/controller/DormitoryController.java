@@ -32,7 +32,7 @@ public class DormitoryController {
         return ReturnMessage.success().add("模式", "测试").add("sex", "男");
     }
 
-    //获取宿舍信息
+    //获取宿舍分页模块
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage getDormitory(@RequestParam(value = "page", defaultValue = "1") Integer page,
