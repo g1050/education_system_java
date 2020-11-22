@@ -27,7 +27,7 @@ public class ManagerController {
     @Autowired
     ManagerService managerService;
 
-    //localhost:8080/manager/test  GET
+    //localhost:8080/api /manager/test  GET
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage test(){
@@ -54,12 +54,23 @@ public class ManagerController {
     //controller -> service -> mapper
     @RequestMapping(value = "",method = RequestMethod.GET)
     @ResponseBody
-    public ReturnMessage getManager(){
+    public ReturnMessage getManager(@RequestParam(value = "page",defaultValue = "1")Integer page,@RequestParam(value = "limit",defaultValue = "5")Integer limit){
+        //拿到limit和page
+        System.out.println(limit);
+        System.out.println(page);
+
+        //引入pageHelper插件
+        PageHelper.startPage(page,limit);
+
         //查询数据库,获取需要的信息
         List<Manager> data = managerService.getAll();
         //把lisst信息add到returnMessage后面
-        return ReturnMessage.success().add("pageInfo",data);
+        //return ReturnMessage.success().add("pageInfo",data);
         //code = 0 message = "成功" extend= { PageinfO 数组(list)}
+
+        //包装一下数据
+        PageInfo pageInfo = new PageInfo(data,5);
+        return ReturnMessage.success().add("pageInfo",pageInfo);
     }
 
     //获取全部管理员(分页展示)
