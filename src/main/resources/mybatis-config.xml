@@ -24,5 +24,6 @@
 		<mapper resource="mapper/ManagerMapper.xml"></mapper>
 		<mapper resource="mapper/MajorMapper.xml"></mapper>
 		<mapper resource="mapper/DormitoryMapper.xml"></mapper>
+		<mapper resource="mapper/ClassMapper.xml"></mapper>
 	</mappers>
 </configuration>

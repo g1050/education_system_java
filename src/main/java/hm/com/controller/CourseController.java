@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @CrossOrigin("*")
 @RequestMapping("/course")
 public class CourseController {
-    @Autowired
-    CourseService courseService;
+//    @Autowired
+//    CourseService courseService;
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     @ResponseBody
 
