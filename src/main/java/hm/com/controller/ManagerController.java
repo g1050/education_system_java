@@ -27,7 +27,7 @@ public class ManagerController {
     @Autowired
     ManagerService managerService;
 
-    //localhost:8080/manager/test  GET
+    //localhost:8080/api /manager/test  GET
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage test(){
