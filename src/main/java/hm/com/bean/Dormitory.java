@@ -1,6 +1,6 @@
 package hm.com.bean;
 
-public class Domnitory {
+public class Dormitory {
     private Integer id;
 
     private String name;
@@ -13,7 +13,7 @@ public class Domnitory {
 
     private String director;
 
-    private Integer member;
+    private String member;
 
     public Integer getId() {
         return id;
@@ -63,11 +63,11 @@ public class Domnitory {
         this.director = director == null ? null : director.trim();
     }
 
-    public Integer getMember() {
+    public String getMember() {
         return member;
     }
 
-    public void setMember(Integer member) {
+    public void setMember(String member) {
         this.member = member;
     }
 }

@@ -1,16 +1,21 @@
 package hm.com.bean;
 
+/**
+ * @author 余龙
+ * @version 1.0
+ * @date 2020/11/21 0:57
+ */
 import java.util.ArrayList;
 import java.util.List;
 
-public class DomnitoryExample {
+public class DormitoryExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public DomnitoryExample() {
+    public DormitoryExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
