@@ -26,4 +26,10 @@ public class ClassService {
         //返回Controller
         return list;
     }
+
+    //调用dao层插入数据库
+    public void addClass(Class aClass) {
+        classMapper.insertSelective(aClass);
+        return;
+    }
 }
