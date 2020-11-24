@@ -25,12 +25,12 @@ public class DormitoryController {
     @Autowired
     DormitoryService dormitoryService;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    @ResponseBody
-
-    public ReturnMessage test() {
-        return ReturnMessage.success().add("模式", "测试").add("sex", "男");
-    }
+//    @RequestMapping(value = "/test", method = RequestMethod.GET)
+//    @ResponseBody
+//
+//    public ReturnMessage test() {
+//        return ReturnMessage.success().add("模式", "测试").add("sex", "男");
+//    }
 
     //获取宿舍分页模块
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -46,5 +46,36 @@ public class DormitoryController {
         //把list信息add到ReturnMessage后面
         PageInfo pageInfo = new PageInfo(list, 5);
         return ReturnMessage.success().add("pageInfo", pageInfo);
+    }
+    //获取宿舍所有信息
+    @RequestMapping(value = "/all")
+    @ResponseBody
+    public ReturnMessage getAllDormitory(){
+        List<Dormitory> list = dormitoryService.getAll();
+        return ReturnMessage.success().add("dormitory",list);
+    }
+    //@RequestBoby 注解 ->解析json
+    //向数据库添加数据
+    @RequestMapping(value = "",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnMessage addDormitory(@RequestBody Dormitory dormitory) {
+        //收到json数据
+        //解析成class对象
+
+        //利用service层插入数据
+        dormitoryService.addDormitory(dormitory);
+        return ReturnMessage.success();
+    }
+
+    //更新dormitory
+    @RequestMapping(value = "",method = RequestMethod.PUT)
+    @ResponseBody
+    public ReturnMessage updateDormitory(@RequestBody Dormitory dormitory){
+        int res = dormitoryService.updateDormitory(dormitory);
+        if(res == 1){
+            return  ReturnMessage.success();
+        }else {
+            return  ReturnMessage.fail();
+        }
     }
 }
