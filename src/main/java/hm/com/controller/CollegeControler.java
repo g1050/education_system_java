@@ -82,16 +82,22 @@ public class CollegeControler {
     }
 
     //删除学院 批量单个二合一
+    //单个 localhost:8080/api/college/27
+    //多个 localhost:8080/api/college/27-26-21-23
     @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
     @ResponseBody
     public ReturnMessage deleteCollege(@PathVariable("ids")String ids){
         //System.out.println(id);
+        //if else判断单个删除或者多个删除
         if(ids.contains("-")){
+            //String List
             String[] strIds = ids.split("-");
+            //构建delIds 数组 Integer
             List<Integer> delIds = new ArrayList<Integer>();
             for(String string : strIds){
                 delIds.add(Integer.parseInt(string));
             }
+            //传给service层
             collegeService.deleteColleges(delIds);
             return ReturnMessage.success();
         }else{

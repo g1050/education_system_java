@@ -20,6 +20,7 @@ import java.util.List;
  * @version: 0.1$
  */
 @Controller
+@CrossOrigin(origins = "*")
 @RequestMapping("/class")
 public class ClassController {
 
