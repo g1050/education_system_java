@@ -28,6 +28,10 @@
 		<mapper resource="mapper/CourseMapper.xml"></mapper>
 =======
 		<mapper resource="mapper/ClassMapper.xml"></mapper>
+<<<<<<< HEAD
+		<mapper resource="mapper/StudentMapper.xml"></mapper>
+
+=======
 		<mapper resource="mapper/ClubMapper.xml"></mapper>
 		<mapper resource="mapper/CourseMapper.xml"></mapper>
 		<mapper resource="mapper/StudentMapper.xml"></mapper>

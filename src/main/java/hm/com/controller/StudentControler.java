@@ -1,25 +1,45 @@
 package hm.com.controller;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import hm.com.bean.ReturnMessage;
+import hm.com.bean.Student;
+import hm.com.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
+@CrossOrigin(origins = "*")
 @RequestMapping("/student")
 class StudentController {
+    @Autowired
+    StudentService studentService;
 
-
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+//    localhost:8080/api/student
+    @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
-    public ReturnMessage test() {
+    public ReturnMessage test(@RequestParam(value = "page",defaultValue = "1")Integer page,
+                              @RequestParam(value = "limit",defaultValue = "5")Integer limit) {
+
         System.out.println("收到class/test请求/123");
         //1.收到请求，到相应的函数
         //2.查询数据库，获取数据
-
+        List<Student> data  = studentService.getAll();
         //3.把数据发送给前端
-        return ReturnMessage.success().add("test","asd").add("pageInfo","asd");
+        PageHelper.startPage(page,limit);
+        PageInfo pageInfo = new PageInfo(data,5);
+        return ReturnMessage.success().add("test",pageInfo);
     }
+    @RequestMapping(value = "",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnMessage addStudent(@RequestBody Student student)
+    {
+        studentService.addStudent(student);
+        return ReturnMessage.success();
+    }
+
 
 
 }
