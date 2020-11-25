@@ -35,8 +35,9 @@ public class CollegeControler {
     CollegeService collegeService;
 
     //分页展示部门信息
-    //localhost:8080/api/ college
-    @RequestMapping("")
+    //localhost:8080/api/college?page=1&limit=5
+    //默认method是get
+    @RequestMapping(value = "",method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage getCollege(@RequestParam(value = "page",defaultValue = "1")Integer page, @RequestParam(value = "limit",defaultValue = "10")Integer limit){
         //引入pageHelper插件
@@ -58,28 +59,15 @@ public class CollegeControler {
     }
 
     //添加学院
+    //post方法
+    //url-> controller -> service(自己实现) -> dao
+    //localhost:8080/api/college POST
     @RequestMapping(value = "",method = RequestMethod.POST)
     @ResponseBody
     public ReturnMessage saveCollege(@RequestBody  College college){
 
-        //验证
-//        if(result.hasErrors()){
-//            //显示校验失败信息
-//            Map<String, Object> map = new HashMap<String, Object>();
-//            List<FieldError> erros = result.getFieldErrors();
-//            for(FieldError fieldError:erros){
-//                System.out.println("错误字段名 " + fieldError.getField());
-//                System.out.println("错误信息" + fieldError.getDefaultMessage());
-//                map.put(fieldError.getField(),fieldError.getDefaultMessage());
-//            }
-//            return ReturnMessage.fail().add("errorFields",erros);
-//        }
-
-        int res = collegeService.saveCollege(college);
-        if(res == 1)
-            return ReturnMessage.success();
-        else
-            return ReturnMessage.fail();
+        collegeService.saveCollege(college);
+        return ReturnMessage.success();
     }
 
     //更新学院
@@ -94,16 +82,22 @@ public class CollegeControler {
     }
 
     //删除学院 批量单个二合一
+    //单个 localhost:8080/api/college/27
+    //多个 localhost:8080/api/college/27-26-21-23
     @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
     @ResponseBody
     public ReturnMessage deleteCollege(@PathVariable("ids")String ids){
         //System.out.println(id);
+        //if else判断单个删除或者多个删除
         if(ids.contains("-")){
+            //String List
             String[] strIds = ids.split("-");
+            //构建delIds 数组 Integer
             List<Integer> delIds = new ArrayList<Integer>();
             for(String string : strIds){
                 delIds.add(Integer.parseInt(string));
             }
+            //传给service层
             collegeService.deleteColleges(delIds);
             return ReturnMessage.success();
         }else{

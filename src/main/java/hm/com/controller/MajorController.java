@@ -46,5 +46,16 @@ public class MajorController {
 
     }
 
+    //添加专业
+    @RequestMapping(value = "",method=RequestMethod.POST)
+    @ResponseBody
+    public ReturnMessage saveMajor(@RequestBody Major major){
+        //收到json数据
+        //解析成class对象
+        //利用service层插入数据
+        majorService.saveMajor(major);
+        return ReturnMessage.success();
+    }
+
 
 }
