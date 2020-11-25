@@ -37,6 +37,10 @@ public class ManagerService {
         return;
     }
 
+    public int updateManager(Manager manager) {
+        return managerMapper.updateByPrimaryKey(manager);
+    }
+
 //    public List<Manager> getAll() {
 //        return managerMapper.selectByExample(null);
 //    }

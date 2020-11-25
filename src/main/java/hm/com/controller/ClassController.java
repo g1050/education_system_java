@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ public class ClassController {
     @Autowired
     ClassService classService;
 
+    //获取class
     //localhost:8080/api/class
     @RequestMapping(value = "",method = RequestMethod.GET)
     @ResponseBody
@@ -47,6 +49,7 @@ public class ClassController {
         //code = 0 message= edtend{test:zy,pageInfo,...}
     }
 
+    //添加class
     //RequestBody注解，自动解析json-> class
     //localhost:8080/api/class POST
     @RequestMapping(value = "",method = RequestMethod.POST)
@@ -60,4 +63,39 @@ public class ClassController {
         return ReturnMessage.success();
     }
 
+    //删除class
+    @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ReturnMessage deleteClass(@PathVariable("ids")String ids){
+        //System.out.println(id);
+        //if else判断单个删除或者多个删除
+        if(ids.contains("-")){
+            //String List
+            String[] strIds = ids.split("-");
+            //构建delIds 数组 Integer
+            List<Integer> delIds = new ArrayList<Integer>();
+            for(String string : strIds){
+                delIds.add(Integer.parseInt(string));
+            }
+            //传给service层
+            classService.deleteClasses(delIds);
+            return ReturnMessage.success();
+        }else{
+            //单个删除
+            classService.deleteClass(Integer.parseInt(ids));
+            return ReturnMessage.success();
+        }
+
+    }
+
+    //更新class
+    @RequestMapping(value = "",method = RequestMethod.PUT)
+    @ResponseBody
+    public ReturnMessage updateClass(@RequestBody  Class classa){
+        int res = classService.updateClass(classa);
+        if(res == 1)
+            return ReturnMessage.success();
+        else
+            return ReturnMessage.fail();
+    }
 }
