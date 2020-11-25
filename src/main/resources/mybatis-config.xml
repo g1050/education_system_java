@@ -25,5 +25,7 @@
 		<mapper resource="mapper/MajorMapper.xml"></mapper>
 		<mapper resource="mapper/DormitoryMapper.xml"></mapper>
 		<mapper resource="mapper/ClassMapper.xml"></mapper>
+		<mapper resource="mapper/StudentMapper.xml"></mapper>
+
 	</mappers>
 </configuration>
