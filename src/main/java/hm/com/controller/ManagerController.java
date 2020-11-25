@@ -86,4 +86,18 @@ public class ManagerController {
 //        return  ReturnMessage.success().add("pageInfo",pageInfo);
 //    }
 
+    //删除管理员
+    //localhost:8080/api/manager/3 DELETE
+    //localhost:8080/api/manager?limit=1&page=1 GET
+    //localhost:8080/api/manager/ids
+    @RequestMapping(value = "{ids}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ReturnMessage deleteManager(@PathVariable("ids")String ids){
+
+        //获得要删除用户的id String->Integer
+        Integer id = Integer.parseInt(ids);
+        managerService.deleteManager(id);
+        return ReturnMessage.success();
+    }
+
 }

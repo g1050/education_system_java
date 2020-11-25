@@ -32,6 +32,11 @@ public class ManagerService {
         return list;
     }
 
+    public void deleteManager(Integer id) {
+        managerMapper.deleteByPrimaryKey(id);
+        return;
+    }
+
 //    public List<Manager> getAll() {
 //        return managerMapper.selectByExample(null);
 //    }
