@@ -15,9 +15,15 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/course")
 public class CourseController {
+<<<<<<< HEAD
     @Autowired  //自动注入函数内容
     CourseService courseService;
     @RequestMapping(value = "",method = RequestMethod.GET)
+=======
+//    @Autowired
+//    CourseService courseService;
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
+>>>>>>> b19ea1efa4ea57732ed71bcf3f7b40b45afabd0c
     @ResponseBody
 
     public ReturnMessage test(@RequestParam(value="page", defaultValue = "1")   Integer page,

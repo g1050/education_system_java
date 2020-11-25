@@ -2,6 +2,7 @@ package hm.com.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import hm.com.bean.College;
 import hm.com.bean.Manager;
 import hm.com.bean.ReturnMessage;
 import hm.com.service.ManagerService;
@@ -73,17 +74,30 @@ public class ManagerController {
         return ReturnMessage.success().add("pageInfo",pageInfo);
     }
 
-    //获取全部管理员(分页展示)
-//    @RequestMapping("")
-//    @ResponseBody
-//    public ReturnMessage getCollege(@RequestParam(value = "page",defaultValue = "1")Integer page, @RequestParam(value = "limit",defaultValue = "10")Integer limit){
-//        //引入pageHelper插件
-//        PageHelper.startPage(page,limit);
-//        //查询
-//        List<Manager> list = managerService.getAll();
-//        //pageInfo包装,第二个参数连续显示的页数
-//        PageInfo pageInfo = new PageInfo(list,5);
-//        return  ReturnMessage.success().add("pageInfo",pageInfo);
-//    }
+    //删除管理员
+    //localhost:8080/api/manager/3 DELETE
+    //localhost:8080/api/manager?limit=1&page=1 GET
+    //localhost:8080/api/manager/ids
+    @RequestMapping(value = "{ids}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ReturnMessage deleteManager(@PathVariable("ids")String ids){
+
+        //获得要删除用户的id String->Integer
+        Integer id = Integer.parseInt(ids);
+        managerService.deleteManager(id);
+        return ReturnMessage.success();
+    }
+
+    //更新管理员
+    //更新学院
+    @RequestMapping(value = "",method = RequestMethod.PUT)
+    @ResponseBody
+    public ReturnMessage updateCollege(@RequestBody Manager manager){
+        int res = managerService.updateManager(manager);
+        if(res == 1)
+            return ReturnMessage.success();
+        else
+            return ReturnMessage.fail();
+    }
 
 }

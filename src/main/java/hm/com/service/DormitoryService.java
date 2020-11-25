@@ -18,15 +18,21 @@ public class DormitoryService {
     @Autowired
     DormitoryMapper dormitoryMapper;
 
-    public void saveMangager(Dormitory dormitory) {
-        dormitoryMapper.insertSelective(dormitory);
-    }
-
     //service层
     public List<Dormitory> getAll() {
         //1.从数据库查询数据
         List<Dormitory> list = dormitoryMapper.selectByExample(null);
         //2.返回给Controller层
         return list;
+    }
+
+    //调用dao层方法实现数据插入数据库
+    public void addDormitory(Dormitory dormitory) {
+        dormitoryMapper.insertSelective(dormitory);
+        return;
+    }
+    //更新数据库
+    public int updateDormitory(Dormitory dormitory) {
+        return dormitoryMapper.updateByPrimaryKey(dormitory);
     }
 }
