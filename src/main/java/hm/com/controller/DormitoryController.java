@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -78,4 +79,31 @@ public class DormitoryController {
             return  ReturnMessage.fail();
         }
     }
+
+    //删除宿舍 批量单个二合一
+    //单个 前端发送请求localhost:8080/api/college/+删除的id号
+    //多个 前端发送请求localhost:8080/api/college/+删除的“01-02-03-06”字符串
+    @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ReturnMessage deleteCollege(@PathVariable("ids")String ids){
+        //if else判断单个删除或者多个删除
+        if(ids.contains("-")){
+            //String List
+            String[] strIds = ids.split("-");
+            //构建delIds 数组 Integer
+            List<Integer> delIds = new ArrayList<Integer>();
+            for(String string : strIds){
+                delIds.add(Integer.parseInt(string));
+            }
+            //传给service层
+            dormitoryService.deleteDormitory(delIds);
+            return ReturnMessage.success();
+        }else{
+            //单个删除
+            dormitoryService.deleteDormitory(Integer.parseInt(ids));
+            return ReturnMessage.success();
+        }
+    }
+
+
 }

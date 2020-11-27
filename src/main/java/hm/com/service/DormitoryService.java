@@ -1,6 +1,7 @@
 package hm.com.service;
 
 import hm.com.bean.Dormitory;
+import hm.com.bean.DormitoryExample;
 import hm.com.dao.DormitoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,18 @@ public class DormitoryService {
     //更新数据库
     public int updateDormitory(Dormitory dormitory) {
         return dormitoryMapper.updateByPrimaryKey(dormitory);
+    }
+
+    //删除数据库单个多个宿舍信息
+    public int deleteDormitory(Integer id) {
+        return dormitoryMapper.deleteByPrimaryKey(id);
+}
+
+    public int deleteDormitory(List<Integer> ids){
+        DormitoryExample example = new DormitoryExample();
+        DormitoryExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(ids);
+
+        return dormitoryMapper.deleteByExample(example);
     }
 }
