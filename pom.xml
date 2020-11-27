@@ -4,7 +4,19 @@
   <artifactId>hm-edu</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>hm-edu Maven Webapp</name>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>7</source>
+					<target>7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<name>hm-edu Maven Webapp</name>
   <!-- 引入jar包 -->
 
   <dependencies>
@@ -72,7 +84,13 @@
 	    <version>4.3.7.RELEASE</version>
 	    <scope>test</scope>
 	</dependency>
-	
+
+	  <!--    token-->
+	  <dependency>
+		  <groupId>com.auth0</groupId>
+		  <artifactId>java-jwt</artifactId>
+		  <version>3.3.0</version>
+	  </dependency>
 	
 	<!-- Spring面向切面编程 -->
 	<!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->

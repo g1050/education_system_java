@@ -1,9 +1,13 @@
 package hm.com.bean;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 
 public class ManagerExample {
     protected String orderByClause;

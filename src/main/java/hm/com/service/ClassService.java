@@ -42,8 +42,10 @@ public class ClassService {
 
     public void deleteClasses(List<Integer> delIds) {
         ClassExample example = new ClassExample();
+
         ClassExample.Criteria criteria = example.createCriteria();
         criteria.andIdIn(delIds);
+
         classMapper.deleteByExample(example);
         return ;
     }
