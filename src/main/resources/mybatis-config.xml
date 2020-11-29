@@ -24,6 +24,18 @@
 		<mapper resource="mapper/ManagerMapper.xml"></mapper>
 		<mapper resource="mapper/MajorMapper.xml"></mapper>
 		<mapper resource="mapper/DormitoryMapper.xml"></mapper>
+<<<<<<< HEAD
+		<mapper resource="mapper/CourseMapper.xml"></mapper>
+=======
 		<mapper resource="mapper/ClassMapper.xml"></mapper>
+<<<<<<< HEAD
+		<mapper resource="mapper/StudentMapper.xml"></mapper>
+
+=======
+		<mapper resource="mapper/ClubMapper.xml"></mapper>
+		<mapper resource="mapper/CourseMapper.xml"></mapper>
+		<mapper resource="mapper/StudentMapper.xml"></mapper>
+		<mapper resource="mapper/TeacherMapper.xml"></mapper>
+>>>>>>> b19ea1efa4ea57732ed71bcf3f7b40b45afabd0c
 	</mappers>
 </configuration>
