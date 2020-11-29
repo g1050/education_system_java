@@ -57,5 +57,16 @@ public class MajorController {
         return ReturnMessage.success();
     }
 
+    //删除专业
+    @RequestMapping(value = "{ids}",method=RequestMethod.DELETE)
+    @ResponseBody
+
+    public ReturnMessage deleteMajor(@PathVariable("ids")String ids){
+        //获得要删除的用户id
+        Integer id=Integer.parseInt(ids);
+        majorService.deleteMajor(id);
+        return ReturnMessage.success();
+    }
+
 
 }

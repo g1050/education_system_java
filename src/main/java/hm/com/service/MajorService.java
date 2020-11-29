@@ -30,4 +30,8 @@ public class MajorService {
         return  majorMapper.updateByPrimaryKey(major);
     }
 
+    public void deleteMajor(Integer id) {
+        majorMapper.deleteByPrimaryKey(id);
+        return;
+    }
 }
