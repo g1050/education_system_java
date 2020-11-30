@@ -3,21 +3,14 @@ package hm.com.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.bean.College;
-import hm.com.bean.ReturnMessage;
+import hm.com.util.ReturnMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import hm.com.service.CollegeService;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.FileHandler;
 
 /**
  * @author ：sky
@@ -73,7 +66,10 @@ public class CollegeControler {
     //更新学院
     @RequestMapping(value = "",method = RequestMethod.PUT)
     @ResponseBody
-    public ReturnMessage updateCollege(@RequestBody  College college){
+    public ReturnMessage updateCollege(@RequestBody  College college
+//            ,@RequestHeader(value = "access_token")String token
+    ){
+//        System.out.println("token = " + token);
         int res = collegeService.updateCollege(college);
         if(res == 1)
             return ReturnMessage.success();

@@ -1,8 +1,6 @@
 package hm.com.controller;
 
-import hm.com.bean.ReturnMessage;
-import hm.com.service.CourseService;
-import org.springframework.beans.factory.annotation.Autowired;
+import hm.com.util.ReturnMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

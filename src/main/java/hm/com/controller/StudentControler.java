@@ -1,5 +1,5 @@
 package hm.com.controller;
-import hm.com.bean.ReturnMessage;
+import hm.com.util.ReturnMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

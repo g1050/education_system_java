@@ -1,7 +1,6 @@
 package hm.com.controller;
 
-import hm.com.bean.Manager;
-import hm.com.bean.ReturnMessage;
+import hm.com.util.ReturnMessage;
 import hm.com.service.ManagerService;
 import hm.com.util.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class LoginController {
         if(!managerService.verify(username,password)){
             return ReturnMessage.fail();
         }
-        String token = JWTUtils.token(username, password);
+        String token = JWTUtils.token(username);
 
         return ReturnMessage.success().add("token",token);
     }

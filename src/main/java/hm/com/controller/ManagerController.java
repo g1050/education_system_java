@@ -2,9 +2,8 @@ package hm.com.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import hm.com.bean.College;
 import hm.com.bean.Manager;
-import hm.com.bean.ReturnMessage;
+import hm.com.util.ReturnMessage;
 import hm.com.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
