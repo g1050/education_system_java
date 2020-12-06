@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,9 +45,13 @@ public class ManagerController {
 
     //添加管理员
     @RequestMapping(value = "",method = RequestMethod.POST)
-    public ReturnMessage saveManager(Manager manager){
-        //managerService.saveMangager(manager);
-        return null;
+    @ResponseBody
+    public ReturnMessage saveManager(@RequestBody Manager manager){
+        //设置管理员的创建时间
+        manager.setCreateTime(new Date(System.currentTimeMillis()));
+
+        managerService.saveMangager(manager);
+        return ReturnMessage.success();
     }
 
     //获取全部管理员(分页展示)
