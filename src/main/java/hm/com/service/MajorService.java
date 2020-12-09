@@ -2,6 +2,7 @@ package hm.com.service;
 
 import hm.com.bean.College;
 import hm.com.bean.Major;
+import hm.com.bean.MajorExample;
 import hm.com.dao.MajorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,20 @@ public class MajorService {
         return list;
     }
 
-    public int updateCollege(Major major) {
-        return  majorMapper.updateByPrimaryKey(major);
+    public void deleteMajor(Integer id) {
+        majorMapper.deleteByPrimaryKey(id);
+        return;
+    }
+    public int deleteMajors(List<Integer> ids){
+        MajorExample example =new MajorExample();
+        MajorExample.Criteria criteria= example.createCriteria();
+        criteria.andIdIn(ids);
+
+        return majorMapper.deleteByExample(example);
     }
 
+    public int updateMajor(Major major) {
+
+        return majorMapper.updateByPrimaryKey(major);
+    }
 }

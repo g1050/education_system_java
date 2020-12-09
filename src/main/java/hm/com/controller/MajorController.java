@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -55,6 +56,43 @@ public class MajorController {
         //利用service层插入数据
         majorService.saveMajor(major);
         return ReturnMessage.success();
+    }
+
+    //更新专业
+    @RequestMapping(value = "",method=RequestMethod.PUT)
+    @ResponseBody
+    public ReturnMessage updateMajor(@RequestBody Major major){
+        int res=majorService.updateMajor(major);
+        if(res==1){
+            return ReturnMessage.success();
+        }
+        else return ReturnMessage.fail();
+
+
+    }
+
+    //删除专业
+    @RequestMapping(value = "{ids}",method=RequestMethod.DELETE)
+    @ResponseBody
+
+    public ReturnMessage deleteMajor(@PathVariable("ids")String ids){
+        //获得要删除的用户id
+        if(ids.contains("-")){
+            String[] strIds=ids.split("-");
+            //构件delIds数组
+            List<Integer> delIds=new ArrayList<Integer>();
+            for(String string:strIds){
+                delIds.add(Integer.parseInt(string));
+            }
+            //传给service层
+            majorService.deleteMajors(delIds);
+            return ReturnMessage.success();
+        }
+        else{ //单个删除
+            majorService.deleteMajor(Integer.parseInt(ids));
+            return ReturnMessage.success();
+        }
+
     }
 
 
