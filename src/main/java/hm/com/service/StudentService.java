@@ -1,5 +1,7 @@
 package hm.com.service;
+import hm.com.bean.ClassExample;
 import hm.com.bean.Student;
+import hm.com.bean.StudentExample;
 import hm.com.dao.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,16 @@ public class StudentService {
         List<Student> data = studentMapper.selectByExample(null);
         return data;
     }
-
+    public void deleteStudent(int parseInt){
+        studentMapper.deleteByPrimaryKey(parseInt);
+        return;
+    }
+    public void deleteStudents(List<Integer> delIds){
+        StudentExample example = new StudentExample();
+        StudentExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(delIds);
+        studentMapper.deleteByExample(example);
+        return;
+    }
 }
 
