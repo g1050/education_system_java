@@ -4,15 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author £ºsky
- * @date £ºCreated in 2020/11/14 13:03
- * @description£ºÍ¨ÓÃ·µ»ØÀà£¬·µ»ØÍ¨ÓÃµÄjsonÊý¾Ý
- * @modified By£º
+ * @author ï¿½ï¿½sky
+ * @date ï¿½ï¿½Created in 2020/11/14 13:03
+ * @descriptionï¿½ï¿½Í¨ï¿½Ã·ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½ï¿½Í¨ï¿½Ãµï¿½jsonï¿½ï¿½ï¿½ï¿½
+ * @modified Byï¿½ï¿½
  * @version: 0.1$
  */
 public class ReturnMessage {
-    //0³É¹¦ 100Ê§°Ü
-    //200 tokenÊ§Ð§¡¢ÎÞÐ§
+    //0ï¿½É¹ï¿½ 100Ê§ï¿½ï¿½
+    //200 tokenÊ§Ð§ï¿½ï¿½ï¿½ï¿½Ð§
     private int code;
     private String Message;
     //key:"test" value:123
@@ -21,23 +21,24 @@ public class ReturnMessage {
     public static ReturnMessage success(){
         ReturnMessage result = new ReturnMessage();
         result.setCode(0);
-        result.setMessage("³É¹¦");
+        result.setMessage("ï¿½É¹ï¿½");
         return result;
     }
 
     public static ReturnMessage invalidToken(){
         ReturnMessage result = new ReturnMessage();
         result.setCode(200);
-        result.setMessage("ÖØÐÂµÇÂ¼");
+        result.setMessage("ï¿½ï¿½ï¿½Âµï¿½Â¼");
         return result;
     }
 
     public static ReturnMessage fail(){
         ReturnMessage result = new ReturnMessage();
         result.setCode(100);
-        result.setMessage("Ê§°Ü");
+        result.setMessage("Ê§ï¿½ï¿½");
         return result;
     }
+
 
     public ReturnMessage add(String key,Object value){
         this.getExtend().put(key,value);
