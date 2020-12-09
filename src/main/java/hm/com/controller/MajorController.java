@@ -58,6 +58,19 @@ public class MajorController {
         return ReturnMessage.success();
     }
 
+    //更新专业
+    @RequestMapping(value = "",method=RequestMethod.PUT)
+    @ResponseBody
+    public ReturnMessage updateMajor(@RequestBody Major major){
+        int res=majorService.updateMajor(major);
+        if(res==1){
+            return ReturnMessage.success();
+        }
+        else return ReturnMessage.fail();
+
+
+    }
+
     //删除专业
     @RequestMapping(value = "{ids}",method=RequestMethod.DELETE)
     @ResponseBody

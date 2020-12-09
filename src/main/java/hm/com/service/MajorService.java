@@ -27,10 +27,6 @@ public class MajorService {
         return list;
     }
 
-    public int updateCollege(Major major) {
-        return  majorMapper.updateByPrimaryKey(major);
-    }
-
     public void deleteMajor(Integer id) {
         majorMapper.deleteByPrimaryKey(id);
         return;
@@ -41,5 +37,10 @@ public class MajorService {
         criteria.andIdIn(ids);
 
         return majorMapper.deleteByExample(example);
+    }
+
+    public int updateMajor(Major major) {
+
+        return majorMapper.updateByPrimaryKey(major);
     }
 }
