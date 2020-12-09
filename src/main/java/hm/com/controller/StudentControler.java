@@ -1,7 +1,7 @@
 package hm.com.controller;
+import hm.com.util.ReturnMessage;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import hm.com.bean.ReturnMessage;
 import hm.com.bean.Student;
 import hm.com.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;

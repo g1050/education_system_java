@@ -1,4 +1,4 @@
-package hm.com.bean;
+package hm.com.util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public class ReturnMessage {
     //0成功 100失败
+    //200 token失效、无效
     private int code;
     private String Message;
     //key:"test" value:123
@@ -21,6 +22,13 @@ public class ReturnMessage {
         ReturnMessage result = new ReturnMessage();
         result.setCode(0);
         result.setMessage("成功");
+        return result;
+    }
+
+    public static ReturnMessage invalidToken(){
+        ReturnMessage result = new ReturnMessage();
+        result.setCode(200);
+        result.setMessage("重新登录");
         return result;
     }
 

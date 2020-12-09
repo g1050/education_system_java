@@ -4,7 +4,7 @@ package hm.com.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.bean.Major;
-import hm.com.bean.ReturnMessage;
+import hm.com.util.ReturnMessage;
 import hm.com.service.MajorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

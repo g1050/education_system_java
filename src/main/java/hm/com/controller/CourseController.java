@@ -1,9 +1,10 @@
 package hm.com.controller;
 
+
+import hm.com.util.ReturnMessage;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.bean.Course;
-import hm.com.bean.ReturnMessage;
 import hm.com.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,6 @@ public class CourseController {
     @Autowired  //自动注入函数内容
     CourseService courseService;
     @RequestMapping(value = "",method = RequestMethod.GET)
-
-//    @Autowired
-//    CourseService courseService;
-    @RequestMapping(value = "/test",method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage test(@RequestParam(value="page", defaultValue = "1")   Integer page,
                               @RequestParam(value = "limit",defaultValue = "100") Integer limit){

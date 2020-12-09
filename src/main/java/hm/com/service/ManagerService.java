@@ -1,6 +1,8 @@
 package hm.com.service;
 
+import hm.com.bean.ClassExample;
 import hm.com.bean.Manager;
+import hm.com.bean.ManagerExample;
 import hm.com.dao.ManagerMapper;
 import org.springframework.beans.factory.annotation.Autowired;;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,19 @@ public class ManagerService {
 
     public int updateManager(Manager manager) {
         return managerMapper.updateByPrimaryKey(manager);
+    }
+
+    public Boolean verify(String username, String password) {
+        ManagerExample managerExample = new ManagerExample();
+
+        ManagerExample.Criteria criteria1 = managerExample.createCriteria().andUsernameEqualTo(username);
+        List<Manager> managers = managerMapper.selectByExample(managerExample);
+
+        if(managers.size() == 0){
+            return false;
+        }
+
+        return  managers.get(0).getPassword().equals(password);
     }
 
 //    public List<Manager> getAll() {
