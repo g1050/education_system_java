@@ -17,11 +17,11 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/course")
 public class CourseController {
+
     @Autowired  //自动注入函数内容
     CourseService courseService;
     @RequestMapping(value = "",method = RequestMethod.GET)
     @ResponseBody
-
     public ReturnMessage test(@RequestParam(value="page", defaultValue = "1")   Integer page,
                               @RequestParam(value = "limit",defaultValue = "100") Integer limit){
             System.out.println(page);

@@ -7,7 +7,9 @@ import hm.com.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sun.plugin2.message.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,7 +41,20 @@ class StudentController {
         studentService.addStudent(student);
         return ReturnMessage.success();
     }
-
-
+    @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ReturnMessage deleteStudent(@PathVariable("ids")String ids){
+    if(ids.contains('-')){
+        String[] strIds = ids.split("-");
+        List<Integer> delIds = new ArrayList<Integer>();
+        for(String string : strIds){
+            delIds.add(Integer.parseInt(string));
+        }
+        studentService.deleteStudents(delIds);
+        return ReturnMessage.success();
+    }else{
+        studentService.deleteStudent(Integer.parseInt(ids));
+        return ReturnMessage.success();
+    }
 
 }

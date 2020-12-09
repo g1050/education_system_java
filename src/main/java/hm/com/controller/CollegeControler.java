@@ -80,7 +80,7 @@ public class CollegeControler {
     //删除学院 批量单个二合一
     //单个 localhost:8080/api/college/27
     //多个 localhost:8080/api/college/27-26-21-23
-    @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{ids} ",method = RequestMethod.DELETE)
     @ResponseBody
     public ReturnMessage deleteCollege(@PathVariable("ids")String ids){
         //System.out.println(id);
