@@ -43,18 +43,19 @@ class StudentController {
     }
     @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
     @ResponseBody
-    public ReturnMessage deleteStudent(@PathVariable("ids")String ids){
-    if(ids.contains('-')){
-        String[] strIds = ids.split("-");
-        List<Integer> delIds = new ArrayList<Integer>();
-        for(String string : strIds){
-            delIds.add(Integer.parseInt(string));
+    public ReturnMessage deleteStudent(@PathVariable("ids")String ids) {
+        if (ids.contains("-")) {
+            String[] strIds = ids.split("-");
+            List<Integer> delIds = new ArrayList<Integer>();
+            for (String string : strIds) {
+                delIds.add(Integer.parseInt(string));
+            }
+            studentService.deleteStudents(delIds);
+            return ReturnMessage.success();
+        } else {
+            studentService.deleteStudent(Integer.parseInt(ids));
+            return ReturnMessage.success();
         }
-        studentService.deleteStudents(delIds);
-        return ReturnMessage.success();
-    }else{
-        studentService.deleteStudent(Integer.parseInt(ids));
-        return ReturnMessage.success();
     }
 
 }

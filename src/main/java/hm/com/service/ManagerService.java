@@ -1,6 +1,7 @@
 package hm.com.service;
 
 import hm.com.bean.ClassExample;
+import hm.com.bean.CollegeExample;
 import hm.com.bean.Manager;
 import hm.com.bean.ManagerExample;
 import hm.com.dao.ManagerMapper;
@@ -54,6 +55,15 @@ public class ManagerService {
         }
 
         return  managers.get(0).getPassword().equals(password);
+    }
+
+    public void deleteManagers(List<Integer> delIds) {
+        ManagerExample example = new ManagerExample();
+        ManagerExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(delIds);
+
+        managerMapper.deleteByExample(example);
+        return;
     }
 
 //    public List<Manager> getAll() {

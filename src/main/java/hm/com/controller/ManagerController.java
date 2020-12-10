@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -82,14 +83,29 @@ public class ManagerController {
     //localhost:8080/api/manager/3 DELETE
     //localhost:8080/api/manager?limit=1&page=1 GET
     //localhost:8080/api/manager/ids
+    //localhost:8080/api/manager/3-4-5
     @RequestMapping(value = "{ids}",method = RequestMethod.DELETE)
     @ResponseBody
     public ReturnMessage deleteManager(@PathVariable("ids")String ids){
 
-        //获得要删除用户的id String->Integer
-        Integer id = Integer.parseInt(ids);
-        managerService.deleteManager(id);
-        return ReturnMessage.success();
+        if(ids.contains("-")){//批量删除
+            //String List
+            String[] strIds = ids.split("-");
+            //构建delIds 数组 Integer
+            List<Integer> delIds = new ArrayList<Integer>();
+            for(String string : strIds){
+                delIds.add(Integer.parseInt(string));
+            }
+            //传给service层
+            managerService.deleteManagers(delIds);
+            return ReturnMessage.success();
+        }else{//单个删除
+            //获得要删除用户的id String->Integer
+            Integer id = Integer.parseInt(ids);
+            managerService.deleteManager(id);
+            return ReturnMessage.success();
+        }
+
     }
 
     //更新管理员

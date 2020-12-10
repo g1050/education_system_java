@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author £ºsky
  * @date £ºCreated in 2020/11/27 20:57
@@ -16,13 +19,12 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
     ManagerService managerService;
 
-    @RequestMapping(value = "",method = RequestMethod.POST)
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public ReturnMessage login(@RequestParam("username")String username,@RequestParam("password")String password){
 
@@ -35,4 +37,16 @@ public class LoginController {
 
         return ReturnMessage.success().add("token",token);
     }
+
+//    @RequestMapping(value = "/",method = RequestMethod.GET)
+//    @ResponseBody
+//    public  ReturnMessage weibo(HttpServletResponse response){
+//        System.out.println("½øÈëweibo");
+//
+//
+//        Cookie cookie = new Cookie("username","123456asd");
+//        response.addCookie(cookie);
+//        return ReturnMessage.success();
+////        return "forward:/api/college";
+//    }
 }

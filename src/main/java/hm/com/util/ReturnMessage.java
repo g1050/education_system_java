@@ -4,15 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author ï¿½ï¿½sky
- * @date ï¿½ï¿½Created in 2020/11/14 13:03
- * @descriptionï¿½ï¿½Í¨ï¿½Ã·ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½ï¿½Í¨ï¿½Ãµï¿½jsonï¿½ï¿½ï¿½ï¿½
- * @modified Byï¿½ï¿½
+ * @author ??sky
+ * @date ??Created in 2020/11/14 13:03
+ * @description????¡Â?????????????json????
+ * @modified By??
  * @version: 0.1$
  */
 public class ReturnMessage {
-    //0ï¿½É¹ï¿½ 100Ê§ï¿½ï¿½
-    //200 tokenÊ§Ð§ï¿½ï¿½ï¿½ï¿½Ð§
+    //0??? 100???
+    //200 token?§¹????§¹
     private int code;
     private String Message;
     //key:"test" value:123
@@ -21,21 +21,21 @@ public class ReturnMessage {
     public static ReturnMessage success(){
         ReturnMessage result = new ReturnMessage();
         result.setCode(0);
-        result.setMessage("ï¿½É¹ï¿½");
+        result.setMessage("³É¹¦");
         return result;
     }
 
     public static ReturnMessage invalidToken(){
         ReturnMessage result = new ReturnMessage();
         result.setCode(200);
-        result.setMessage("ï¿½ï¿½ï¿½Âµï¿½Â¼");
+        result.setMessage("Î´µÇÂ¼");
         return result;
     }
 
     public static ReturnMessage fail(){
         ReturnMessage result = new ReturnMessage();
         result.setCode(100);
-        result.setMessage("Ê§ï¿½ï¿½");
+        result.setMessage("Ê§°Ü");
         return result;
     }
 
