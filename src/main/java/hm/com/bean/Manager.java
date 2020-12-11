@@ -3,6 +3,11 @@ package hm.com.bean;
 import java.util.Date;
 
 public class Manager {
+
+
+    //—ß‘∫ Ù–‘
+    private College college;
+
     private Integer id;
 
     private String username;
@@ -18,6 +23,14 @@ public class Manager {
     private String email;
 
     private Date createTime;
+
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
+    }
 
     public Integer getId() {
         return id;

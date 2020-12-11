@@ -11,6 +11,21 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="create_time" jdbcType="DATE" property="createTime" />
   </resultMap>
+<!--  设置resultMap-->
+  <resultMap id="BaseResultMapWithCollege" type="hm.com.bean.Manager">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <association property="college" javaType="hm.com.bean.College">
+      <id column="name" property="name"/>
+    </association>
+  </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -70,8 +85,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, sex, college_id, avatar_url, email, create_time
+    m.id, username, password, sex, college_id, avatar_url, email, create_time
   </sql>
+  <sql id="College_Column_List">
+    m.id, username, password, sex, college_id, avatar_url, email, create_time, c.name
+  </sql>
+<!--  SELECT-->
+<!--  *-->
+<!--  FROM `manager` m LEFT JOIN college c-->
+<!--  ON m.college_id = c.id;-->
   <select id="selectByExample" parameterType="hm.com.bean.ManagerExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -79,6 +101,23 @@
     </if>
     <include refid="Base_Column_List" />
     from manager
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+<!--  List<Manager> selectByExampleWithCollege(ManagerExample example);-->
+  <select id="selectByExampleWithCollege" parameterType="hm.com.bean.ManagerExample" resultMap="BaseResultMapWithCollege">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="College_Column_List" />
+    FROM `manager` m LEFT JOIN college c
+    ON m.college_id = c.id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

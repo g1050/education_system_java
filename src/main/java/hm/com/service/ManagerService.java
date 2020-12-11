@@ -30,7 +30,7 @@ public class ManagerService {
     //service层
     public List<Manager> getAll() {
         //1.从数据库查询数据
-        List<Manager> list = managerMapper.selectByExample(null);
+        List<Manager> list = managerMapper.selectByExampleWithCollege(null);
         //2.返回给Controller层
         return list;
     }

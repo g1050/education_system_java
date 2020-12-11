@@ -16,6 +16,10 @@ public interface ManagerMapper {
 
     int insertSelective(Manager record);
 
+    //携带学院信息,联合查询
+    List<Manager> selectByExampleWithCollege(ManagerExample example);
+
+    //显示学院id
     List<Manager> selectByExample(ManagerExample example);
 
     Manager selectByPrimaryKey(Integer id);
