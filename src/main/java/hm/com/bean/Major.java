@@ -1,6 +1,11 @@
 package hm.com.bean;
 
 public class Major {
+
+
+    //自定义学院信息
+    private College college;
+
     private Integer id;
 
     private String name;
@@ -10,6 +15,14 @@ public class Major {
     private Integer number;
 
     private String director;
+
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
+    }
 
     public Integer getId() {
         return id;

@@ -28,8 +28,6 @@ public class LoginController {
     @ResponseBody
     public ReturnMessage login(@RequestParam("username")String username,@RequestParam("password")String password){
 
-        System.out.println(username);
-        System.out.println(password);
         if(!managerService.verify(username,password)){
             return ReturnMessage.fail();
         }

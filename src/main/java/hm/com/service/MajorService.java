@@ -22,7 +22,7 @@ public class MajorService {
 
     public List<Major> getAll() {
         //从数据库查询数据
-        List<Major> list= majorMapper.selectByExample(null);
+        List<Major> list= majorMapper.selectByExampleWithCollege(null);
         //返回给controller
         return list;
     }

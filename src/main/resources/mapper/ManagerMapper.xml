@@ -85,7 +85,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    m.id, username, password, sex, college_id, avatar_url, email, create_time
+    id, username, password, sex, college_id, avatar_url, email, create_time
   </sql>
   <sql id="College_Column_List">
     m.id, username, password, sex, college_id, avatar_url, email, create_time, c.name

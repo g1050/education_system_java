@@ -8,6 +8,17 @@
     <result column="number" jdbcType="INTEGER" property="number" />
     <result column="director" jdbcType="VARCHAR" property="director" />
   </resultMap>
+  <resultMap id="ResultMapWithCollege" type="hm.com.bean.Major">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="director" jdbcType="VARCHAR" property="director" />
+    <association property="college" javaType="hm.com.bean.College">
+      <result column="college_name" property="name"/>
+
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -69,6 +80,9 @@
   <sql id="Base_Column_List">
     id, name, college_id, number, director
   </sql>
+  <sql id="College_Column_List">
+    m.id, m.name, college_id, number, director,c.name as college_name
+  </sql>
   <select id="selectByExample" parameterType="hm.com.bean.MajorExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -76,6 +90,23 @@
     </if>
     <include refid="Base_Column_List" />
     from major
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+<!--  List<Major> selectByExampleWithCollege(MajorExample example);-->
+  <select id="selectByExampleWithCollege" parameterType="hm.com.bean.MajorExample" resultMap="ResultMapWithCollege">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="College_Column_List" />
+    FROM major m
+    LEFT JOIN college c
+    ON m.college_id=c.id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

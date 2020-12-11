@@ -18,6 +18,9 @@ public interface MajorMapper {
 
     List<Major> selectByExample(MajorExample example);
 
+    //包含具体学院名字
+    List<Major> selectByExampleWithCollege(MajorExample example);
+
     Major selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Major record, @Param("example") MajorExample example);
