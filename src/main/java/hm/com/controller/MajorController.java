@@ -3,6 +3,7 @@ package hm.com.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import hm.com.bean.College;
 import hm.com.bean.Major;
 import hm.com.util.ReturnMessage;
 import hm.com.service.MajorService;
@@ -29,6 +30,13 @@ public class MajorController {
 
 
     //获取全部专业
+    @RequestMapping("/all")
+    @ResponseBody
+    public ReturnMessage getAllCollege(){
+        List<Major> list =majorService.getAll();
+        return ReturnMessage.success().add("major",list);
+    }
+    //分页展示专业
     @RequestMapping(value="",method=RequestMethod.GET)
     @ResponseBody
     public ReturnMessage getMajor(@RequestParam(value="page",defaultValue = "1")Integer page,@RequestParam(value="limit",defaultValue = "5")Integer limit
