@@ -29,5 +29,6 @@
 		<mapper resource="mapper/StudentMapper.xml"></mapper>
 		<mapper resource="mapper/TeacherMapper.xml"></mapper>
 		<mapper resource="mapper/ClassMapper.xml"></mapper>
+		<mapper resource="mapper/CourseToTeacherMapper.xml"></mapper>
 	</mappers>
 </configuration>

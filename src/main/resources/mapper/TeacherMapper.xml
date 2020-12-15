@@ -6,8 +6,8 @@
     <result column="college_id" jdbcType="INTEGER" property="collegeId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="sex" jdbcType="BIT" property="sex" />
-    <result column="email" jdbcType="INTEGER" property="email" />
-    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="address" jdbcType="VARCHAR" property="address" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -106,7 +106,7 @@
       sex, email, phone, address
       )
     values (#{id,jdbcType=INTEGER}, #{collegeId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=BIT}, #{email,jdbcType=INTEGER}, #{phone,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}
+      #{sex,jdbcType=BIT}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="hm.com.bean.Teacher">
@@ -148,10 +148,10 @@
         #{sex,jdbcType=BIT},
       </if>
       <if test="email != null">
-        #{email,jdbcType=INTEGER},
+        #{email,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=INTEGER},
+        #{phone,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
@@ -180,10 +180,10 @@
         sex = #{record.sex,jdbcType=BIT},
       </if>
       <if test="record.email != null">
-        email = #{record.email,jdbcType=INTEGER},
+        email = #{record.email,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=INTEGER},
+        phone = #{record.phone,jdbcType=VARCHAR},
       </if>
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
@@ -199,8 +199,8 @@
       college_id = #{record.collegeId,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=BIT},
-      email = #{record.email,jdbcType=INTEGER},
-      phone = #{record.phone,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -219,10 +219,10 @@
         sex = #{sex,jdbcType=BIT},
       </if>
       <if test="email != null">
-        email = #{email,jdbcType=INTEGER},
+        email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        phone = #{phone,jdbcType=INTEGER},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
@@ -235,8 +235,8 @@
     set college_id = #{collegeId,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=BIT},
-      email = #{email,jdbcType=INTEGER},
-      phone = #{phone,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
