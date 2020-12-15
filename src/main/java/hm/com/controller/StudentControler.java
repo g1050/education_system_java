@@ -58,4 +58,13 @@ class StudentController {
         }
     }
 
+
+    //Ñ§ÉúÑ¡¿Î
+    @RequestMapping(value = "/course/{studentId}/{courseId}",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnMessage selectCoures(@PathVariable("studentId")Integer studentId,@PathVariable("courseId")Integer courseId){
+        studentService.selectCourse(studentId,courseId);
+        return ReturnMessage.success();
+    }
+
 }

@@ -41,7 +41,7 @@ public class ManagerService {
     }
 
     public int updateManager(Manager manager) {
-        return managerMapper.updateByPrimaryKey(manager);
+        return managerMapper.updateByPrimaryKeySelective(manager);
     }
 
     public Boolean verify(String username, String password) {
@@ -64,6 +64,16 @@ public class ManagerService {
 
         managerMapper.deleteByExample(example);
         return;
+    }
+
+    public Manager getMangerByUsername(String username) {
+        List<Manager> all = getAll();
+        for(Manager manager : all){
+            if(manager.getUsername().equals(username)){
+                return manager;
+            }
+        }
+        return null;
     }
 
 //    public List<Manager> getAll() {

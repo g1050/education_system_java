@@ -161,4 +161,5 @@
     set course_id = #{courseId,jdbcType=INTEGER}
     where teacher_id = #{teacherId,jdbcType=INTEGER}
   </update>
+ 
 </mapper>

@@ -1,7 +1,6 @@
 package hm.com.service;
-import hm.com.bean.ClassExample;
-import hm.com.bean.Student;
-import hm.com.bean.StudentExample;
+import hm.com.bean.*;
+import hm.com.dao.CourseToStudentMapper;
 import hm.com.dao.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,8 @@ import java.util.List;
 public class StudentService {
     @Autowired
     StudentMapper studentMapper;
+    @Autowired
+    CourseToStudentMapper courseToStudentMapper;
 
     public void addStudent(Student student) {
          studentMapper.insertSelective(student);
@@ -35,6 +36,15 @@ public class StudentService {
         criteria.andIdIn(delIds);
         studentMapper.deleteByExample(example);
         return;
+    }
+
+    //插入学生选课记录
+    public void selectCourse(Integer studentId, Integer courseId) {
+        CourseToStudent courseToStudent = new CourseToStudent();
+        courseToStudent.setCourseId(courseId);
+        courseToStudent.setStudentId(studentId);
+
+        courseToStudentMapper.insert(courseToStudent);
     }
 }
 

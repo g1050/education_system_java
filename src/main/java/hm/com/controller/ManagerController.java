@@ -120,4 +120,18 @@ public class ManagerController {
             return ReturnMessage.fail();
     }
 
+    @RequestMapping(value = "/byusername",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnMessage getMangerByUsername(@RequestParam(value = "username",defaultValue = "")String username ){
+        Manager manager = null;
+
+        if(username.equals("")){//返回全部数据
+
+        }else{//查询返回
+             manager = managerService.getMangerByUsername(username);
+        }
+        System.out.println(username);
+        return  ReturnMessage.success().add("pageInfo",manager);
+    }
+
 }

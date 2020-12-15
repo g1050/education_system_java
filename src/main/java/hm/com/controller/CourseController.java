@@ -88,4 +88,28 @@ public class CourseController {
         return ReturnMessage.success();
     }
     }
+
+    @RequestMapping(value = "/teacher/{teacherId}",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnMessage getCourseByTeacherId(@PathVariable("teacherId")Integer teacherId,
+                                              @RequestParam(value="page", defaultValue = "1")   Integer page,
+                                              @RequestParam(value = "limit",defaultValue = "100") Integer limit)
+    {
+        PageHelper.startPage(page,limit);
+        List<Course> list = courseService.getCourseByTeacherId(teacherId);
+        PageInfo pageInfo = new PageInfo(list, 5);
+        return ReturnMessage.success().add("pageInfo",pageInfo);
+    }
+
+    @RequestMapping(value = "/student/{studentId}",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnMessage getCourseByStudentId(@PathVariable("studentId")Integer studentId,
+                                              @RequestParam(value="page", defaultValue = "1")   Integer page,
+                                              @RequestParam(value = "limit",defaultValue = "100") Integer limit)
+    {
+        PageHelper.startPage(page,limit);
+        List<Course> list = courseService.getCourseByStudentIdt(studentId);
+        PageInfo pageInfo = new PageInfo(list, 5);
+        return ReturnMessage.success().add("pageInfo",pageInfo);
+    }
 }
