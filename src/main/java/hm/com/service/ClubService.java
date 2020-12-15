@@ -2,6 +2,7 @@ package hm.com.service;
 
 import hm.com.bean.Club;
 import hm.com.bean.ClubExample;
+import hm.com.bean.Manager;
 import hm.com.dao.ClubMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,9 @@ public class ClubService {
     }
     //更新数据库
     public int updateClub(Club club) {
-        return clubMapper.updateByPrimaryKey(club);
+        return clubMapper.updateByPrimaryKeySelective(club);
     }
+
 
     //删除数据库单个多个club信息
     public int deleteClub(Integer id) {
