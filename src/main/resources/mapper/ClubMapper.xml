@@ -8,7 +8,21 @@
     <result column="college_id" jdbcType="INTEGER" property="collegeId" />
     <result column="student_num" jdbcType="INTEGER" property="studentNum" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+  <!--  List<Class> selectByExampleWithMajorAndCollege(ClassExample example);-->
+  <resultMap id="ResultMapWithCollege" type="hm.com.bean.Club">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="director" jdbcType="VARCHAR" property="director" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+    <result column="student_num" jdbcType="INTEGER" property="studentNum" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+    <association property="college" javaType="hm.com.bean.College">
+      <result column="college_name" property="name"/>
+    </association>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,6 +85,9 @@
   <sql id="Base_Column_List">
     id, director, name, college_id, student_num, description, phone
   </sql>
+  <sql id="College_Column_List">
+    c.id, c.director, c.name, c.college_id, c.student_num, c.description, c.phone,b.name as college_name
+  </sql>
   <select id="selectByExample" parameterType="hm.com.bean.ClubExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -78,6 +95,22 @@
     </if>
     <include refid="Base_Column_List" />
     from club
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <!--  自己设置插入语句-->
+  <select id="selectByExampleWithCollege" parameterType="hm.com.bean.ClubExample" resultMap="ResultMapWithCollege">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="College_Column_List" />
+    FROM club c
+    LEFT JOIN college b ON c.college_id=b.id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -107,7 +140,7 @@
       phone)
     values (#{id,jdbcType=INTEGER}, #{director,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{collegeId,jdbcType=INTEGER}, #{studentNum,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=INTEGER})
+      #{phone,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="hm.com.bean.Club">
     insert into club
@@ -154,7 +187,7 @@
         #{description,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=INTEGER},
+        #{phone,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -186,7 +219,7 @@
         description = #{record.description,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=INTEGER},
+        phone = #{record.phone,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -201,7 +234,7 @@
       college_id = #{record.collegeId,jdbcType=INTEGER},
       student_num = #{record.studentNum,jdbcType=INTEGER},
       description = #{record.description,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=INTEGER}
+      phone = #{record.phone,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -225,7 +258,7 @@
         description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        phone = #{phone,jdbcType=INTEGER},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -237,7 +270,7 @@
       college_id = #{collegeId,jdbcType=INTEGER},
       student_num = #{studentNum,jdbcType=INTEGER},
       description = #{description,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=INTEGER}
+      phone = #{phone,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

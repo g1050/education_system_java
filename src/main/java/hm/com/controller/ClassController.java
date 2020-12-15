@@ -3,6 +3,7 @@ package hm.com.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.bean.Class;
+import hm.com.bean.Dormitory;
 import hm.com.util.ReturnMessage;
 import hm.com.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ClassController {
     @Autowired
     ClassService classService;
 
-    //获取class
+    //获取class分页模块
     //localhost:8080/api/class
     @RequestMapping(value = "",method = RequestMethod.GET)
     @ResponseBody
@@ -46,6 +47,14 @@ public class ClassController {
 
         return ReturnMessage.success().add("pageInfo",pageInfo);
         //code = 0 message= edtend{test:zy,pageInfo,...}
+    }
+
+    //获取班级所有信息
+    @RequestMapping(value = "/all")
+    @ResponseBody
+    public ReturnMessage getAllCollegeAndMajor(){
+        List<Class> list = classService.getAll();
+        return ReturnMessage.success().add("class",list);
     }
 
     //添加class

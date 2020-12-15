@@ -3,6 +3,9 @@ package hm.com.bean;
 public class Club {
     private Integer id;
 
+    //自定义学院专业信息
+    private College college;
+
     private String director;
 
     private String name;
@@ -13,7 +16,7 @@ public class Club {
 
     private String description;
 
-    private Integer phone;
+    private String phone;
 
     public Integer getId() {
         return id;
@@ -63,11 +66,19 @@ public class Club {
         this.description = description == null ? null : description.trim();
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
     }
 }

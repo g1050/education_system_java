@@ -3,6 +3,9 @@ package hm.com.dao;
 import hm.com.bean.Class;
 import hm.com.bean.ClassExample;
 import java.util.List;
+
+import hm.com.bean.Major;
+import hm.com.bean.MajorExample;
 import org.apache.ibatis.annotations.Param;
 
 public interface ClassMapper {
@@ -17,6 +20,9 @@ public interface ClassMapper {
     int insertSelective(Class record);
 
     List<Class> selectByExample(ClassExample example);
+
+    //包含具体学院和专业名字
+    List<Class> selectByExampleWithMajorAndCollege(ClassExample example);
 
     Class selectByPrimaryKey(Integer id);
 
