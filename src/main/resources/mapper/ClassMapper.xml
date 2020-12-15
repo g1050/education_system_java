@@ -10,6 +10,23 @@
     <result column="party_secretary" jdbcType="VARCHAR" property="partySecretary" />
     <result column="college_id" jdbcType="INTEGER" property="collegeId" />
   </resultMap>
+<!--  List<Class> selectByExampleWithMajorAndCollege(ClassExample example);-->
+  <resultMap id="ResultMapWithMajorAndCollege" type="hm.com.bean.Class">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="major_id" jdbcType="INTEGER" property="majorId" />
+    <result column="student_num" jdbcType="INTEGER" property="studentNum" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="director" jdbcType="VARCHAR" property="director" />
+    <result column="party_secretary" jdbcType="VARCHAR" property="partySecretary" />
+    <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+    <association property="major" javaType="hm.com.bean.Major">
+      <result column="major_name" property="name"/>
+    </association>
+    <association property="college" javaType="hm.com.bean.College">
+      <result column="college_name" property="name"/>
+    </association>
+  </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -71,6 +88,9 @@
   <sql id="Base_Column_List">
     id, major_id, student_num, name, director, party_secretary, college_id
   </sql>
+  <sql id="Major_Column_List">
+    c.id, c.major_id, c.student_num, c.name, c.director, c.party_secretary, c.college_id,m.name as major_name,b.name as college_name
+  </sql>
   <select id="selectByExample" parameterType="hm.com.bean.ClassExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -78,6 +98,23 @@
     </if>
     <include refid="Base_Column_List" />
     from class
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+<!--  自己设置插入语句-->
+  <select id="selectByExampleWithMajorAndCollege" parameterType="hm.com.bean.ClassExample" resultMap="ResultMapWithMajorAndCollege">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Major_Column_List" />
+    FROM class c LEFT JOIN major m
+    ON c.major_id=m.id
+    LEFT JOIN college b ON c.college_id=b.id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

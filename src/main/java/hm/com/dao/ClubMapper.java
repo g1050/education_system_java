@@ -1,5 +1,7 @@
 package hm.com.dao;
 
+import hm.com.bean.Class;
+import hm.com.bean.ClassExample;
 import hm.com.bean.Club;
 import hm.com.bean.ClubExample;
 import java.util.List;
@@ -17,6 +19,9 @@ public interface ClubMapper {
     int insertSelective(Club record);
 
     List<Club> selectByExample(ClubExample example);
+
+    //包含具体学院名字
+    List<Club> selectByExampleWithCollege(ClubExample example);
 
     Club selectByPrimaryKey(Integer id);
 

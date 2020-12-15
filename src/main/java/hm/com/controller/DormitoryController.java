@@ -85,7 +85,7 @@ public class DormitoryController {
     //多个 前端发送请求localhost:8080/api/college/+删除的“01-02-03-06”字符串
     @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
     @ResponseBody
-    public ReturnMessage deleteCollege(@PathVariable("ids")String ids){
+    public ReturnMessage deleteDormitory(@PathVariable("ids")String ids){
         //if else判断单个删除或者多个删除
         if(ids.contains("-")){
             //String List

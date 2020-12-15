@@ -24,7 +24,8 @@ public class ClassService {
 
     public List<Class> getAll() {
         //发给dao层，dao层负责从数据库中查询数据
-        List<Class> list = classMapper.selectByExample(null);
+        List<Class> list = classMapper.selectByExampleWithMajorAndCollege(null);
+        //System.out.println(list.toString());
         //返回Controller
         return list;
     }
