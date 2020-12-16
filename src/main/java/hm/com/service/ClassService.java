@@ -2,6 +2,7 @@ package hm.com.service;
 
 import hm.com.bean.Class;
 import hm.com.bean.ClassExample;
+import hm.com.bean.Club;
 import hm.com.bean.CollegeExample;
 import hm.com.dao.ClassMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class ClassService {
         return ;
     }
 
-    public int updateClass(Class classa) {
-        return classMapper.updateByPrimaryKey(classa);
+    public int  updateClass(Class classa) {
+        return classMapper.updateByPrimaryKeySelective(classa);
     }
 }
