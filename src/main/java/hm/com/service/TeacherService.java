@@ -1,9 +1,16 @@
 package hm.com.service;
 
 import hm.com.bean.CourseToTeacher;
+import hm.com.bean.CourseToTeacherExample;
+import hm.com.bean.Teacher;
+import hm.com.bean.TeacherExample;
 import hm.com.dao.CourseToTeacherMapper;
+import hm.com.dao.TeacherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ：sky
@@ -16,6 +23,8 @@ import org.springframework.stereotype.Service;
 public class TeacherService {
 
     @Autowired
+    TeacherMapper teacherMapper;
+    @Autowired
     CourseToTeacherMapper courseToTeacherMapper;
 
     //插入学生选课记录
@@ -24,6 +33,36 @@ public class TeacherService {
         courseToTeacher.setCourseId(courseId);
         courseToTeacher.setTeacherId(teacherId);
 
-        courseToTeacherMapper.insert(courseToTeacher);
+        courseToTeacherMapper.insertSelective(courseToTeacher);
+    }
+
+    public List<CourseToTeacher> getTeacherByCourseId(Integer courseId) {
+//        List<Integer> ids = new ArrayList<Integer>();
+//        //根据courseId获取所有teacherId
+//        CourseToTeacherExample example = new CourseToTeacherExample();
+//        CourseToTeacherExample.Criteria criteria = example.createCriteria();
+//        criteria.andCourseIdEqualTo(courseId);
+//        List<CourseToTeacher> courseToTeachers = courseToTeacherMapper.selectByExample(example);
+//
+//        System.out.println(courseToTeachers.toString());
+//        for(CourseToTeacher res : courseToTeachers){
+//            ids.add(res.getTeacherId());
+//        }
+//
+//        System.out.println("ids = " + ids.toString());
+//        //根据teacherId查出所有teacher
+//        TeacherExample teacherExample = new TeacherExample();
+//        TeacherExample.Criteria criteria1 = teacherExample.createCriteria();
+//        criteria1.andIdIn(ids);
+
+        return courseToTeacherMapper.selectByCouseId(courseId);
+    }
+
+    public void deleteCourse2Teacher(Integer courseId, Integer teacherId) {
+        CourseToTeacherExample example = new CourseToTeacherExample();
+        CourseToTeacherExample.Criteria criteria = example.createCriteria();
+        criteria.andCourseIdEqualTo(courseId).andTeacherIdEqualTo(teacherId);
+        courseToTeacherMapper.deleteByExample(example);
+        return;
     }
 }

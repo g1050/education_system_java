@@ -79,7 +79,7 @@ public class CourseService {
         //获得ids
         List<Integer> ids = new ArrayList<Integer>();
         for(CourseToStudent c: courseToStudents){
-            ids.add(c.getCourseId());
+            ids.add(c.getCourseToTeacherId());
         }
 
         System.out.println(ids.toString());
