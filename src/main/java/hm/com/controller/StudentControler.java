@@ -1,4 +1,5 @@
 package hm.com.controller;
+import hm.com.bean.Class;
 import hm.com.util.ReturnMessage;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -44,18 +45,33 @@ class StudentController {
     @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
     @ResponseBody
     public ReturnMessage deleteStudent(@PathVariable("ids")String ids) {
+        //if else判断单个删除或者多个删除
+
         if (ids.contains("-")) {
             String[] strIds = ids.split("-");
             List<Integer> delIds = new ArrayList<Integer>();
+            //构建delIds 数组 Integer
             for (String string : strIds) {
                 delIds.add(Integer.parseInt(string));
             }
+            //传给service层
             studentService.deleteStudents(delIds);
             return ReturnMessage.success();
         } else {
+            //单个删除
             studentService.deleteStudent(Integer.parseInt(ids));
             return ReturnMessage.success();
         }
+    }
+    //更新student
+    @RequestMapping(value = "",method = RequestMethod.PUT)
+    @ResponseBody
+    public ReturnMessage updateStudent(@RequestBody Student student){
+        int res = studentService.updateStduent(student);
+        if(res == 1)
+            return ReturnMessage.success();
+        else
+            return ReturnMessage.fail();
     }
 
 
