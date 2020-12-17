@@ -10,6 +10,19 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="address" jdbcType="VARCHAR" property="address" />
   </resultMap>
+<!--  List<Teacher> selectByExampleWithCollege(TeacherExample example);-->
+  <resultMap id="ResultMapWithCollege" type="hm.com.bean.Teacher">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <association property="college" javaType="hm.com.bean.College">
+      <result column="college_name" property="name"/>
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -71,6 +84,10 @@
   <sql id="Base_Column_List">
     id, college_id, name, sex, email, phone, address
   </sql>
+<!--  联合查询-->
+  <sql id="College_Column_List">
+    t.id, t.college_id, t.name, t.sex, t.email, t.phone, t.address,c.name as college_name
+  </sql>
   <select id="selectByExample" parameterType="hm.com.bean.TeacherExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -78,6 +95,22 @@
     </if>
     <include refid="Base_Column_List" />
     from teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <!--  自己设置插入语句-->
+  <select id="selectByExampleWithCollege" parameterType="hm.com.bean.TeacherExample" resultMap="ResultMapWithCollege">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="College_Column_List" />
+    FROM teacher t
+    LEFT JOIN college c ON t.college_id=c.id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

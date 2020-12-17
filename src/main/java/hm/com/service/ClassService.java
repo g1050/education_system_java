@@ -1,13 +1,12 @@
 package hm.com.service;
 
+import hm.com.bean.*;
 import hm.com.bean.Class;
-import hm.com.bean.ClassExample;
-import hm.com.bean.Club;
-import hm.com.bean.CollegeExample;
 import hm.com.dao.ClassMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,5 +53,29 @@ public class ClassService {
 
     public int  updateClass(Class classa) {
         return classMapper.updateByPrimaryKeySelective(classa);
+    }
+
+    public List<Class> getClassByCollege(String collegeName) {
+        List <Class> all = getAll();
+        List <Class> res = new ArrayList<Class>();
+
+        for(Class aclass : all){
+            if(aclass.getCollege().getName().equals(collegeName)){
+                res.add(aclass);
+            }
+        }
+        return res;
+    }
+
+    public List<Class> getClassByName(String name) {
+        List <Class> all = getAll();
+        List <Class> res = new ArrayList<Class>();
+
+        for(Class aclass : all){
+            if(aclass.getName().equals(name)){
+                res.add(aclass);
+            }
+        }
+        return res;
     }
 }

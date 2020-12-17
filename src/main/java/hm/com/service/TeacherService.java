@@ -27,6 +27,32 @@ public class TeacherService {
     @Autowired
     CourseToTeacherMapper courseToTeacherMapper;
 
+    public List<Teacher> getAll() {
+        List<Teacher> list = teacherMapper.selectByExampleWithCollege(null);
+        return list;
+    }
+
+    public void addTeacher(Teacher teacher){
+        teacherMapper.insertSelective(teacher);
+        return;
+    }
+
+    public  int updateTeacher(Teacher teacher){
+        return teacherMapper.updateByPrimaryKeySelective(teacher);
+    }
+
+    public int deteleTeacher(Integer id){
+        return teacherMapper.deleteByPrimaryKey(id);
+    }
+
+    public int deteleTeachers(List<Integer> ids){
+        TeacherExample example = new TeacherExample();
+        TeacherExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(ids);
+
+        return teacherMapper.deleteByExample(example);
+    }
+
     //插入学生选课记录
     public void selectCourse(Integer teacherId, Integer courseId) {
         CourseToTeacher courseToTeacher = new CourseToTeacher();
@@ -64,5 +90,18 @@ public class TeacherService {
         criteria.andCourseIdEqualTo(courseId).andTeacherIdEqualTo(teacherId);
         courseToTeacherMapper.deleteByExample(example);
         return;
+    }
+
+
+    public List<Teacher> getTeacherByCollege(String college) {
+        List<Teacher> all = getAll();
+        List<Teacher> list = new ArrayList<Teacher>();
+
+        for(Teacher teacher : all){
+            if(teacher.getCollege().getName().equals(college)){
+                list.add(teacher);
+            }
+        }
+        return list;
     }
 }

@@ -1,5 +1,6 @@
 package hm.com.service;
 
+import hm.com.bean.Class;
 import hm.com.bean.Club;
 import hm.com.bean.ClubExample;
 import hm.com.bean.Manager;
@@ -7,6 +8,7 @@ import hm.com.dao.ClubMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,5 +52,17 @@ public class ClubService {
         criteria.andIdIn(ids);
 
         return clubMapper.deleteByExample(example);
+    }
+
+    public List<Club> getClubByCollege(String college) {
+        List <Club> all = getAll();
+        List<Club> list = new ArrayList<Club>();
+
+        for(Club club : all){
+            if(club.getCollege().getName().equals(college)){
+                list.add(club);
+            }
+        }
+        return list;
     }
 }

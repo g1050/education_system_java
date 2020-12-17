@@ -3,6 +3,9 @@ package hm.com.bean;
 public class Teacher {
     private Integer id;
 
+    //自定义学院信息
+    private College college;
+
     private Integer collegeId;
 
     private String name;
@@ -69,5 +72,13 @@ public class Teacher {
 
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
+    }
+
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
     }
 }

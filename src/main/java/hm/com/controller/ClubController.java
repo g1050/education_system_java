@@ -5,12 +5,15 @@ import com.github.pagehelper.PageInfo;
 import hm.com.bean.Club;
 import hm.com.service.ClubService;
 import hm.com.util.ReturnMessage;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 余龙
@@ -94,5 +97,33 @@ public class ClubController {
             clubService.deleteClub(Integer.parseInt(ids));
             return ReturnMessage.success();
         }
+    }
+
+    //查询
+    @RequestMapping(value = "/bycollege",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnMessage getClubByCollege(@RequestParam(value = "searchParams")String searchParams,
+                                             @RequestParam(value = "page",defaultValue = "")Integer page,
+                                             @RequestParam(value = "limit",defaultValue = "")Integer limit){
+        Map<String, String> map = new HashMap<String, String>();
+        map = JSONObject.fromObject(searchParams);
+
+        String college = map.get("college");
+        System.out.println(limit);
+        System.out.println(page);
+
+        List<Club> club = null;
+
+        if(college.equals("")){//返回全部数据
+            club = clubService.getAll();
+        }else{//查询返回
+            club = clubService.getClubByCollege(college);
+        }
+        //引入pageHelper插件
+        PageHelper.startPage(page,limit);
+        //包装一下数据
+        PageInfo pageInfo = new PageInfo(club,5);
+        System.out.println(college);
+        return  ReturnMessage.success().add("pageInfo",pageInfo);
     }
 }
