@@ -8,6 +8,7 @@ import hm.com.dao.ManagerMapper;
 import org.springframework.beans.factory.annotation.Autowired;;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,14 +67,16 @@ public class ManagerService {
         return;
     }
 
-    public Manager getMangerByUsername(String username) {
+    public List<Manager> getMangerByUsername(String username) {
         List<Manager> all = getAll();
-        for(Manager manager : all){
+        List<Manager> list = new ArrayList<Manager>();
+
+        for(Manager manager:all){
             if(manager.getUsername().equals(username)){
-                return manager;
+                list.add(manager);
             }
         }
-        return null;
+        return list;
     }
 
 //    public List<Manager> getAll() {

@@ -42,10 +42,10 @@ public class StudentService {
         return studentMapper.updateByPrimaryKeySelective(student);
     }
 
-    //插入学生选课记录
+    //插入学生选课记录,根据course_to_teacher的id选课
     public void selectCourse(Integer studentId, Integer courseId) {
         CourseToStudent courseToStudent = new CourseToStudent();
-        courseToStudent.setCourseId(courseId);
+        courseToStudent.setCourseToTeacherId(courseId);
         courseToStudent.setStudentId(studentId);
 
         courseToStudentMapper.insert(courseToStudent);

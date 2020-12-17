@@ -10,7 +10,7 @@ public interface CourseToTeacherMapper {
 
     int deleteByExample(CourseToTeacherExample example);
 
-    int deleteByPrimaryKey(Integer teacherId);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(CourseToTeacher record);
 
@@ -18,7 +18,9 @@ public interface CourseToTeacherMapper {
 
     List<CourseToTeacher> selectByExample(CourseToTeacherExample example);
 
-    CourseToTeacher selectByPrimaryKey(Integer teacherId);
+    List<CourseToTeacher> selectByCouseId(@Param("courseId") Integer courseId);
+
+    CourseToTeacher selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") CourseToTeacher record, @Param("example") CourseToTeacherExample example);
 
