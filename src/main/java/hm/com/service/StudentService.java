@@ -1,5 +1,6 @@
 package hm.com.service;
 import hm.com.bean.*;
+import hm.com.bean.Class;
 import hm.com.dao.CourseToStudentMapper;
 import hm.com.dao.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,9 @@ public class StudentService {
         criteria.andIdIn(delIds);
         studentMapper.deleteByExample(example);
         return;
+    }
+    public int  updateStduent(Student student) {
+        return studentMapper.updateByPrimaryKeySelective(student);
     }
 
     //插入学生选课记录,根据course_to_teacher的id选课
