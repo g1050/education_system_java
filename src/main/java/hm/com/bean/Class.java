@@ -1,14 +1,6 @@
 package hm.com.bean;
 
 public class Class {
-    public College getCollege() {
-        return college;
-    }
-
-    public void setCollege(College college) {
-        this.college = college;
-    }
-
     //自定义学院专业信息
     private College college;
 
@@ -83,6 +75,15 @@ public class Class {
     public void setCollegeId(Integer collegeId) {
         this.collegeId = collegeId;
     }
+
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
+    }
+
 
     public Major getMajor() {
         return major;

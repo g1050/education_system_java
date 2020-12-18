@@ -37,8 +37,8 @@ public class CourseToTeacher {
     @RequestMapping(value = "/bycourse/{courseId}",method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage getTeacherByCourseId(@PathVariable("courseId")Integer courseId,
-                                              @RequestParam("page")Integer page,
-                                              @RequestParam("limit")Integer limit){
+                                              @RequestParam(value = "page",defaultValue = "1")Integer page,
+                                              @RequestParam(value = "limit",defaultValue = "1")Integer limit){
 
         PageHelper.startPage(page,limit);
         //根据courseId获取所有老师

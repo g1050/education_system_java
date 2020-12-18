@@ -4,14 +4,19 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.bean.Class;
 import hm.com.bean.Dormitory;
+import hm.com.bean.Manager;
 import hm.com.util.ReturnMessage;
 import hm.com.service.ClassService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ：sky
@@ -105,5 +110,46 @@ public class ClassController {
             return ReturnMessage.success();
         else
             return ReturnMessage.fail();
+    }
+
+    //查询
+    @RequestMapping(value = "/bycollege",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnMessage getClassByCollege(@RequestParam(value = "college",defaultValue = "")String college ){
+        List<Class>list = null;
+        if(college.equals("")){//返回全部数据
+
+        }else{//查询返回
+             list = classService.getClassByCollege(college);
+        }
+        System.out.println(college);
+        return  ReturnMessage.success().add("pageInfo",list);
+    }
+    //查询
+    @RequestMapping(value = "/byname",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnMessage getClassByName(@RequestParam(value = "searchParams")String searchParams,
+                                        @RequestParam(value = "page",defaultValue = "")Integer page,
+                                        @RequestParam(value = "limit",defaultValue = "")Integer limit){
+        Map<String, String> map = new HashMap<String, String>();
+        map = JSONObject.fromObject(searchParams);
+
+        String name = map.get("name");
+        System.out.println("page");
+        System.out.println("limit");
+
+        List<Class> aclass = null;
+        if(name.equals("")){//返回全部数据
+            aclass = classService.getAll();
+        }else{//查询返回
+            aclass = classService.getClassByName(name);
+        }
+
+        //引入pageHelper插件
+        PageHelper.startPage(page,limit);
+        //包装一下数据
+        PageInfo pageInfo = new PageInfo(aclass,5);
+        System.out.println(name);
+        return  ReturnMessage.success().add("pageInfo",pageInfo);
     }
 }

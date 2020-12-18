@@ -3,7 +3,7 @@ package hm.com.bean;
 public class Club {
     private Integer id;
 
-    //自定义学院专业信息
+    //自定义学院信息
     private College college;
 
     private String director;
