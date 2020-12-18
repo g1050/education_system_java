@@ -9,6 +9,17 @@
     <result column="score" jdbcType="INTEGER" property="score" />
     <result column="required" jdbcType="BIT" property="required" />
   </resultMap>
+  <resultMap id="ResultMapWithCollege" type="hm.com.bean.Course">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+    <result column="class_hour" jdbcType="INTEGER" property="classHour" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="required" jdbcType="BIT" property="required" />
+    <association property="college" javaType="hm.com.bean.College">
+      <result column="college_name" property="name"/>
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -70,6 +81,9 @@
   <sql id="Base_Column_List">
     id, name, college_id, class_hour, score, required
   </sql>
+  <sql id="College_Column_List">
+    c.id, name, c.college_id, c.class_hour, c.score, c.required,b.name as college_name
+  </sql>
   <select id="selectByExample" parameterType="hm.com.bean.CourseExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -77,6 +91,22 @@
     </if>
     <include refid="Base_Column_List" />
     from course
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <!--  自己设置插入语句-->
+  <select id="selectByExampleWithCollege" parameterType="hm.com.bean.CourseExample" resultMap="ResultMapWithCollege">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="College_Column_List" />
+    FROM course c
+    LEFT JOIN college b ON c.college_id=b.id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

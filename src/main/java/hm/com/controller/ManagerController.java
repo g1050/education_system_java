@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import hm.com.bean.Manager;
 import hm.com.util.ReturnMessage;
 import hm.com.service.ManagerService;
+//import net.sf.json.JSONObject;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 /**
- * @author £ºsky
- * @date £ºCreated in 2020/11/14 18:14
- * @description£º¹ÜÀíÔ±¿ØÖÆÆ÷
- * @modified By£º
+ * @author ï¿½ï¿½sky
+ * @date ï¿½ï¿½Created in 2020/11/14 18:14
+ * @descriptionï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @modified Byï¿½ï¿½
  * @version: 0.1$
  */
 @Controller
@@ -34,53 +35,53 @@ public class ManagerController {
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage test(){
-        //²éÑ¯Êý¾Ý¿â£¬»ñÈ¡È«²¿¹ÜÀíÔ±ÐÅÏ¢
+        //ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ý¿â£¬ï¿½ï¿½È¡È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
 
-        //°Ñ¹ÜÀíÔ±ÐÅÏ¢·µ»Ø¸øÇ°¶Ë
+        //ï¿½Ñ¹ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ø¸ï¿½Ç°ï¿½ï¿½
 
-        return ReturnMessage.success().add("name","ÕÅ¾ü").add("Êý¾Ý","ÏëÒªµÄÊý¾Ý").add("pageInfo","PageInfo¶ÔÏó");
+        return ReturnMessage.success().add("name","ï¿½Å¾ï¿½").add("ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½").add("pageInfo","PageInfoï¿½ï¿½ï¿½ï¿½");
         //code = 0
-        //message = "³É¹¦"
+        //message = "ï¿½É¹ï¿½"
         //extend k:name v:zj
-        //k:Êý¾Ý v:...
+        //k:ï¿½ï¿½ï¿½ï¿½ v:...
     }
 
-    //Ìí¼Ó¹ÜÀíÔ±
+    //ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½Ô±
     @RequestMapping(value = "",method = RequestMethod.POST)
     @ResponseBody
     public ReturnMessage saveManager(@RequestBody Manager manager){
-        //ÉèÖÃ¹ÜÀíÔ±µÄ´´½¨Ê±¼ä
+        //ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½Ô±ï¿½Ä´ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
         manager.setCreateTime(new Date(System.currentTimeMillis()));
 
         managerService.saveMangager(manager);
         return ReturnMessage.success();
     }
 
-    //»ñÈ¡È«²¿¹ÜÀíÔ±(·ÖÒ³Õ¹Ê¾)
+    //ï¿½ï¿½È¡È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±(ï¿½ï¿½Ò³Õ¹Ê¾)
     //localhost:8080/api/manager GET
     //controller -> service -> mapper
     @RequestMapping(value = "",method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage getManager(@RequestParam(value = "page",defaultValue = "1")Integer page,@RequestParam(value = "limit",defaultValue = "5")Integer limit){
-        //ÄÃµ½limitºÍpage
+        //ï¿½Ãµï¿½limitï¿½ï¿½page
         System.out.println(limit);
         System.out.println(page);
 
-        //ÒýÈëpageHelper²å¼þ
+        //ï¿½ï¿½ï¿½ï¿½pageHelperï¿½ï¿½ï¿½
         PageHelper.startPage(page,limit);
 
-        //²éÑ¯Êý¾Ý¿â,»ñÈ¡ÐèÒªµÄÐÅÏ¢
+        //ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ý¿ï¿½,ï¿½ï¿½È¡ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ï¢
         List<Manager> data = managerService.getAll();
-        //°ÑlisstÐÅÏ¢addµ½returnMessageºóÃæ
+        //ï¿½ï¿½lisstï¿½ï¿½Ï¢addï¿½ï¿½returnMessageï¿½ï¿½ï¿½ï¿½
         //return ReturnMessage.success().add("pageInfo",data);
-        //code = 0 message = "³É¹¦" extend= { PageinfO Êý×é(list)}
+        //code = 0 message = "ï¿½É¹ï¿½" extend= { PageinfO ï¿½ï¿½ï¿½ï¿½(list)}
 
-        //°ü×°Ò»ÏÂÊý¾Ý
+        //ï¿½ï¿½×°Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         PageInfo pageInfo = new PageInfo(data,5);
         return ReturnMessage.success().add("pageInfo",pageInfo);
     }
 
-    //É¾³ý¹ÜÀíÔ±
+    //É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±
     //localhost:8080/api/manager/3 DELETE
     //localhost:8080/api/manager?limit=1&page=1 GET
     //localhost:8080/api/manager/ids
@@ -89,19 +90,19 @@ public class ManagerController {
     @ResponseBody
     public ReturnMessage deleteManager(@PathVariable("ids")String ids){
 
-        if(ids.contains("-")){//ÅúÁ¿É¾³ý
+        if(ids.contains("-")){//ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
             //String List
             String[] strIds = ids.split("-");
-            //¹¹½¨delIds Êý×é Integer
+            //ï¿½ï¿½ï¿½ï¿½delIds ï¿½ï¿½ï¿½ï¿½ Integer
             List<Integer> delIds = new ArrayList<Integer>();
             for(String string : strIds){
                 delIds.add(Integer.parseInt(string));
             }
-            //´«¸øservice²ã
+            //ï¿½ï¿½ï¿½ï¿½serviceï¿½ï¿½
             managerService.deleteManagers(delIds);
             return ReturnMessage.success();
-        }else{//µ¥¸öÉ¾³ý
-            //»ñµÃÒªÉ¾³ýÓÃ»§µÄid String->Integer
+        }else{//ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
+            //ï¿½ï¿½ï¿½ÒªÉ¾ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½id String->Integer
             Integer id = Integer.parseInt(ids);
             managerService.deleteManager(id);
             return ReturnMessage.success();
@@ -109,8 +110,8 @@ public class ManagerController {
 
     }
 
-    //¸üÐÂ¹ÜÀíÔ±
-    //¸üÐÂÑ§Ôº
+    //ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï¿½Ô±
+    //ï¿½ï¿½ï¿½ï¿½Ñ§Ôº
     @RequestMapping(value = "",method = RequestMethod.PUT)
     @ResponseBody
     public ReturnMessage updateCollege(@RequestBody Manager manager){
@@ -135,14 +136,14 @@ public class ManagerController {
 
         List<Manager> manager = null;
 
-        if(username.equals("")){//·µ»ØÈ«²¿Êý¾Ý
+        if(username.equals("")){//ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             manager = managerService.getAll();
-        }else{//²éÑ¯·µ»Ø
+        }else{//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
             manager = managerService.getMangerByUsername(username);
         }
-        //ÒýÈëpageHelper²å¼þ
+        //ï¿½ï¿½ï¿½ï¿½pageHelperï¿½ï¿½ï¿½
         PageHelper.startPage(page,limit);
-        //°ü×°Ò»ÏÂÊý¾Ý
+        //ï¿½ï¿½×°Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         PageInfo pageInfo = new PageInfo(manager,5);
         System.out.println(username);
         return  ReturnMessage.success().add("pageInfo",pageInfo);
