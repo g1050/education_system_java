@@ -29,4 +29,6 @@ public interface CourseToTeacherMapper {
     int updateByPrimaryKeySelective(CourseToTeacher record);
 
     int updateByPrimaryKey(CourseToTeacher record);
+
+    List<CourseToTeacher> selectByTeacherId(@Param("teacherId")Integer teacherId);
 }

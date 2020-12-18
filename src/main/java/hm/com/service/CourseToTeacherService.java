@@ -40,4 +40,8 @@ public class CourseToTeacherService {
     }
 
 
+    public List<CourseToTeacher> getCourseByTeacherId(Integer teacherId) {
+        return courseToTeacherMapper.selectByTeacherId(teacherId);
+
+    }
 }

@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 //需要导入SpringTest单元模块
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
-public class MapperTest {
+public class TestMapper {
 	@Autowired
 	CollegeMapper collegeMapper;
 	@Autowired

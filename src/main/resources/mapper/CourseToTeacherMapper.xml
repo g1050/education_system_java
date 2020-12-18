@@ -19,6 +19,7 @@
       <result column="address" jdbcType="VARCHAR" property="address" />
     </association>
     <association property="course" javaType="hm.com.bean.Course">
+      <id column="cid" jdbcType="INTEGER" property="id" />
       <result column="cname" jdbcType="VARCHAR" property="name" />
       <result column="college_id" jdbcType="INTEGER" property="collegeId" />
       <result column="class_hour" jdbcType="INTEGER" property="classHour" />
@@ -208,5 +209,18 @@
       ON t.id = ct.teacher_id
       WHERE ct.teacher_id is NOT null
       and c.id = #{courseId}
+  </select>
+
+
+<!--  List<CourseToTeacher> selectByTeacherId(@Param("teacherId")Integer teacherId);-->
+  <select id="selectByTeacherId" resultMap="ResultMapWithTeacherAndCourse">
+      SELECT ct.id as ctid , ct.*,c.*,t.*,c.name as cname,t.name as tname,c.id as cid
+      FROM course_to_teacher ct
+      LEFT JOIN course c
+      ON c.id = ct.course_id
+      LEFT JOIN teacher t
+      ON t.id = ct.teacher_id
+      WHERE ct.teacher_id is NOT null
+      and t.id = #{teacherId}
   </select>
 </mapper>
