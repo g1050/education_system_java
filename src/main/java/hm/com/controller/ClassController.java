@@ -7,7 +7,7 @@ import hm.com.bean.Dormitory;
 import hm.com.bean.Manager;
 import hm.com.util.ReturnMessage;
 import hm.com.service.ClassService;
-import net.sf.json.JSONObject;
+//import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -132,7 +132,7 @@ public class ClassController {
                                         @RequestParam(value = "page",defaultValue = "")Integer page,
                                         @RequestParam(value = "limit",defaultValue = "")Integer limit){
         Map<String, String> map = new HashMap<String, String>();
-        map = JSONObject.fromObject(searchParams);
+//        map = JSONObject.fromObject(searchParams);
 
         String name = map.get("name");
         System.out.println("page");

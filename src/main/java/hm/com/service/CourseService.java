@@ -21,7 +21,7 @@ public class CourseService {
 
     public List<Course> getAll(){
         //1.从数据库获取信息
-        List <Course> list = courseMapper.selectByExample(null);
+        List <Course> list = courseMapper.selectByExampleWithCollege(null);
         //返回
         return list;
     }
