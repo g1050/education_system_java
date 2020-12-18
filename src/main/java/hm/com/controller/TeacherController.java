@@ -70,7 +70,7 @@ public class TeacherController {
     }
 
     //删除teacher 单个And批量
-    @RequestMapping(value = "/{ids",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
     @ResponseBody
     public ReturnMessage deleteTeacher(@PathVariable("ids")String ids){
         //if else 判断请求是单个or批量删除
@@ -142,7 +142,7 @@ public class TeacherController {
         }else{//查询返回
             teachers = teacherService.getTeacherByCollege(college);
         }
-        //引入pageHelper插件
+        //引入pageHelper
         PageHelper.startPage(page,limit);
         //包装一下数据
         PageInfo pageInfo = new PageInfo(teachers,5);
