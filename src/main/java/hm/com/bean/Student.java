@@ -13,7 +13,7 @@ public class Student {
 
     private Boolean sex;
 
-    private Integer idCard;
+    private String idCard;
 
     public Integer getId() {
         return id;
@@ -63,11 +63,11 @@ public class Student {
         this.sex = sex;
     }
 
-    public Integer getIdCard() {
+    public String getIdCard() {
         return idCard;
     }
 
-    public void setIdCard(Integer idCard) {
-        this.idCard = idCard;
+    public void setIdCard(String idCard) {
+        this.idCard = idCard == null ? null : idCard.trim();
     }
 }
