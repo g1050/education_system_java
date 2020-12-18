@@ -504,52 +504,62 @@ public class StudentExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdCardEqualTo(Integer value) {
+        public Criteria andIdCardEqualTo(String value) {
             addCriterion("id_card =", value, "idCard");
             return (Criteria) this;
         }
 
-        public Criteria andIdCardNotEqualTo(Integer value) {
+        public Criteria andIdCardNotEqualTo(String value) {
             addCriterion("id_card <>", value, "idCard");
             return (Criteria) this;
         }
 
-        public Criteria andIdCardGreaterThan(Integer value) {
+        public Criteria andIdCardGreaterThan(String value) {
             addCriterion("id_card >", value, "idCard");
             return (Criteria) this;
         }
 
-        public Criteria andIdCardGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIdCardGreaterThanOrEqualTo(String value) {
             addCriterion("id_card >=", value, "idCard");
             return (Criteria) this;
         }
 
-        public Criteria andIdCardLessThan(Integer value) {
+        public Criteria andIdCardLessThan(String value) {
             addCriterion("id_card <", value, "idCard");
             return (Criteria) this;
         }
 
-        public Criteria andIdCardLessThanOrEqualTo(Integer value) {
+        public Criteria andIdCardLessThanOrEqualTo(String value) {
             addCriterion("id_card <=", value, "idCard");
             return (Criteria) this;
         }
 
-        public Criteria andIdCardIn(List<Integer> values) {
+        public Criteria andIdCardLike(String value) {
+            addCriterion("id_card like", value, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNotLike(String value) {
+            addCriterion("id_card not like", value, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardIn(List<String> values) {
             addCriterion("id_card in", values, "idCard");
             return (Criteria) this;
         }
 
-        public Criteria andIdCardNotIn(List<Integer> values) {
+        public Criteria andIdCardNotIn(List<String> values) {
             addCriterion("id_card not in", values, "idCard");
             return (Criteria) this;
         }
 
-        public Criteria andIdCardBetween(Integer value1, Integer value2) {
+        public Criteria andIdCardBetween(String value1, String value2) {
             addCriterion("id_card between", value1, value2, "idCard");
             return (Criteria) this;
         }
 
-        public Criteria andIdCardNotBetween(Integer value1, Integer value2) {
+        public Criteria andIdCardNotBetween(String value1, String value2) {
             addCriterion("id_card not between", value1, value2, "idCard");
             return (Criteria) this;
         }

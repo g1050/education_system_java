@@ -8,7 +8,7 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="sex" jdbcType="BIT" property="sex" />
-    <result column="id_card" jdbcType="INTEGER" property="idCard" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -106,7 +106,7 @@
       phone, email, sex, id_card
       )
     values (#{id,jdbcType=INTEGER}, #{collegeId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, #{idCard,jdbcType=INTEGER}
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, #{idCard,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="hm.com.bean.Student">
@@ -154,7 +154,7 @@
         #{sex,jdbcType=BIT},
       </if>
       <if test="idCard != null">
-        #{idCard,jdbcType=INTEGER},
+        #{idCard,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -186,7 +186,7 @@
         sex = #{record.sex,jdbcType=BIT},
       </if>
       <if test="record.idCard != null">
-        id_card = #{record.idCard,jdbcType=INTEGER},
+        id_card = #{record.idCard,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -201,7 +201,7 @@
       phone = #{record.phone,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=BIT},
-      id_card = #{record.idCard,jdbcType=INTEGER}
+      id_card = #{record.idCard,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -225,7 +225,7 @@
         sex = #{sex,jdbcType=BIT},
       </if>
       <if test="idCard != null">
-        id_card = #{idCard,jdbcType=INTEGER},
+        id_card = #{idCard,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -237,7 +237,7 @@
       phone = #{phone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=BIT},
-      id_card = #{idCard,jdbcType=INTEGER}
+      id_card = #{idCard,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
