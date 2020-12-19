@@ -49,4 +49,13 @@ public class CourseToStudentController {
         PageInfo pageInfo = new PageInfo(list,limit);
         return ReturnMessage.success().add("pageInfo",pageInfo);
     }
+
+    //localhost:8080/api/c2s/id
+    //¸ù¾ÝÖ÷¼üÉ¾³ý
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ReturnMessage deleteCourseToTeacher(@PathVariable("id")Integer id){
+        courseToStudentService.deleteCourse2Teacher(id);
+        return ReturnMessage.success();
+    }
 }

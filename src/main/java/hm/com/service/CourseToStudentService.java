@@ -34,7 +34,10 @@ public class CourseToStudentService {
     }
 
     public List<CourseToStudent> getCourseByStudentId(Integer studentId) {
-
         return courseToStudentMapper.selectByExampleWithCourseAndTeacher(studentId);
+    }
+
+    public void deleteCourse2Teacher(Integer id) {
+         courseToStudentMapper.deleteByPrimaryKey(id);
     }
 }
