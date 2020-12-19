@@ -22,7 +22,7 @@ import java.util.List;
 @Controller
 @CrossOrigin(origins = "*")
 @RequestMapping("/c2t")
-public class CourseToTeacher {
+public class CourseToTeacherController {
     @Autowired
     CourseToTeacherService courseToTeacherService;
 

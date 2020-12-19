@@ -15,8 +15,7 @@ import java.util.List;
 public class StudentService {
     @Autowired
     StudentMapper studentMapper;
-    @Autowired
-    CourseToStudentMapper courseToStudentMapper;
+
 
     public void addStudent(Student student) {
          studentMapper.insertSelective(student);
@@ -42,13 +41,6 @@ public class StudentService {
         return studentMapper.updateByPrimaryKeySelective(student);
     }
 
-    //插入学生选课记录,根据course_to_teacher的id选课
-    public void selectCourse(Integer studentId, Integer courseId) {
-        CourseToStudent courseToStudent = new CourseToStudent();
-        courseToStudent.setCourseToTeacherId(courseId);
-        courseToStudent.setStudentId(studentId);
 
-        courseToStudentMapper.insert(courseToStudent);
-    }
 }
 

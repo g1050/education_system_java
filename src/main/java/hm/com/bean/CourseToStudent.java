@@ -1,6 +1,10 @@
 package hm.com.bean;
 
 public class CourseToStudent {
+    private Course course;
+
+    private Teacher teacher;
+
     private Integer id;
 
     private Integer studentId;
@@ -29,5 +33,21 @@ public class CourseToStudent {
 
     public void setCourseToTeacherId(Integer courseToTeacherId) {
         this.courseToTeacherId = courseToTeacherId;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }
