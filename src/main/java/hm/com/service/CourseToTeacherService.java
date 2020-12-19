@@ -44,4 +44,9 @@ public class CourseToTeacherService {
         return courseToTeacherMapper.selectByTeacherId(teacherId);
 
     }
+
+    //获取所有的选修课的老师和课程信息
+    public List<CourseToTeacher> getAllNotRequiredCourse() {
+        return courseToTeacherMapper.selectAllNotRequiredCourse();
+    }
 }

@@ -91,4 +91,12 @@ public class CourseService {
         return courseMapper.selectByExample(example);
 //        return null;
     }
+
+    public List<Course> getAllNotRequired() {
+        CourseExample example = new CourseExample();
+        CourseExample.Criteria criteria = example.createCriteria();
+        criteria.andRequiredEqualTo(false);
+
+        return courseMapper.selectByExample(example);
+    }
 }

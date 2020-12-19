@@ -82,7 +82,7 @@
     id, name, college_id, class_hour, score, required
   </sql>
   <sql id="College_Column_List">
-    c.id, name, c.college_id, c.class_hour, c.score, c.required,b.name as college_name
+    c.id, c.name, c.college_id, c.class_hour, c.score, c.required,b.name as college_name
   </sql>
   <select id="selectByExample" parameterType="hm.com.bean.CourseExample" resultMap="BaseResultMap">
     select
