@@ -18,6 +18,9 @@ public interface CourseMapper {
 
     List<Course> selectByExample(CourseExample example);
 
+    //通过学院Id查询
+    List<Course> selectByExampleWithCollege(CourseExample example);
+
     Course selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Course record, @Param("example") CourseExample example);

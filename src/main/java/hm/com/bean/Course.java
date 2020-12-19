@@ -1,6 +1,8 @@
 package hm.com.bean;
 
 public class Course {
+    private College college;
+
     private Integer id;
 
     private String name;

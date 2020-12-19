@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author 余龙
+ * @author ????
  * @version 1.0
  * @date 2020/12/11 11:39
  */
@@ -27,7 +27,7 @@ import java.util.Map;
 public class ClubController {
     @Autowired
     ClubService clubService;
-    //获取社团分页模块
+    //????????????
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage getClub(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -36,33 +36,33 @@ public class ClubController {
         System.out.println(page);
 
         PageHelper.startPage(page, limit);
-        //查询数据库
+        //????????
         List<Club> list = clubService.getAll();
-        //把list信息add到ReturnMessage后面
+        //??list???add??ReturnMessage????
         PageInfo pageInfo = new PageInfo(list, 5);
         return ReturnMessage.success().add("pageInfo", pageInfo);
     }
-    //获取社团所有信息
+    //??????????????
     @RequestMapping(value = "/all")
     @ResponseBody
     public ReturnMessage getAllClub(){
         List<Club> list = clubService.getAll();
         return ReturnMessage.success().add("club",list);
     }
-    //@RequestBoby 注解 ->解析json
-    //向数据库添加数据
+    //@RequestBoby ??? ->????json
+    //??????????????
     @RequestMapping(value = "",method = RequestMethod.POST)
     @ResponseBody
     public ReturnMessage addClub(@RequestBody Club club) {
-        //收到json数据
-        //解析成class对象
+        //???json????
+        //??????class????
 
-        //利用service层插入数据
+        //????service?????????
         clubService.addClub(club);
         return ReturnMessage.success();
     }
 
-    //更新club
+    //????club
     @RequestMapping(value = "",method = RequestMethod.PUT)
     @ResponseBody
     public ReturnMessage updateClub(@RequestBody Club club){
@@ -74,32 +74,32 @@ public class ClubController {
         }
     }
 
-    //删除club 批量单个二合一
-    //单个 前端发送请求localhost:8080/api/college/+删除的id号
-    //多个 前端发送请求localhost:8080/api/college/+删除的“01-02-03-06”字符串
+    //???club ?????????????
+    //???? ??????????localhost:8080/api/college/+?????id??
+    //??? ??????????localhost:8080/api/college/+??????01-02-03-06???????
     @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
     @ResponseBody
     public ReturnMessage deleteClub(@PathVariable("ids")String ids){
-        //if else判断单个删除或者多个删除
+        //if else?ж????????????????
         if(ids.contains("-")){
             //String List
             String[] strIds = ids.split("-");
-            //构建delIds 数组 Integer
+            //????delIds ???? Integer
             List<Integer> delIds = new ArrayList<Integer>();
             for(String string : strIds){
                 delIds.add(Integer.parseInt(string));
             }
-            //传给service层
+            //????service??
             clubService.deleteClub(delIds);
             return ReturnMessage.success();
         }else{
-            //单个删除
+            //???????
             clubService.deleteClub(Integer.parseInt(ids));
             return ReturnMessage.success();
         }
     }
 
-    //查询
+    //???
     @RequestMapping(value = "/bycollege",method = RequestMethod.POST)
     @ResponseBody
     public ReturnMessage getClubByCollege(@RequestParam(value = "searchParams")String searchParams,
@@ -114,14 +114,14 @@ public class ClubController {
 
         List<Club> club = null;
 
-        if(college.equals("")){//返回全部数据
+        if(college.equals("")){//???????????
             club = clubService.getAll();
-        }else{//查询返回
+        }else{//???????
             club = clubService.getClubByCollege(college);
         }
-        //引入pageHelper插件
+        //????pageHelper???
         PageHelper.startPage(page,limit);
-        //包装一下数据
+        //??????????
         PageInfo pageInfo = new PageInfo(club,5);
         System.out.println(college);
         return  ReturnMessage.success().add("pageInfo",pageInfo);
