@@ -92,6 +92,7 @@ public class CourseService {
         return courseMapper.selectByExample(example);
 //        return null;
     }
+<<<<<<< HEAD
     //字段查询
     public List<Course> getCourseByCollege(String college) {
         List <Course> all = getAll();
@@ -127,5 +128,14 @@ public class CourseService {
             }
         }
         return list;
+=======
+
+    public List<Course> getAllNotRequired() {
+        CourseExample example = new CourseExample();
+        CourseExample.Criteria criteria = example.createCriteria();
+        criteria.andRequiredEqualTo(false);
+
+        return courseMapper.selectByExample(example);
+>>>>>>> ce5f1926ab3f0777a5f650491fee5330851b2317
     }
 }

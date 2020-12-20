@@ -6,6 +6,27 @@
     <result column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="course_to_teacher_id" jdbcType="INTEGER" property="courseToTeacherId" />
   </resultMap>
+  <resultMap id="BaseResultMapWithCourseAndTeacher" type="hm.com.bean.CourseToStudent">
+    <id column="csid" jdbcType="INTEGER" property="id" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="course_to_teacher_id" jdbcType="INTEGER" property="courseToTeacherId" />
+    <association property="teacher" javaType="hm.com.bean.Teacher">
+      <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+      <result column="tname" jdbcType="VARCHAR" property="name" />
+      <result column="sex" jdbcType="BIT" property="sex" />
+      <result column="email" jdbcType="VARCHAR" property="email" />
+      <result column="phone" jdbcType="VARCHAR" property="phone" />
+      <result column="address" jdbcType="VARCHAR" property="address" />
+    </association>
+    <association property="course" javaType="hm.com.bean.Course">
+      <id column="cid" jdbcType="INTEGER" property="id" />
+      <result column="cname" jdbcType="VARCHAR" property="name" />
+      <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+      <result column="class_hour" jdbcType="INTEGER" property="classHour" />
+      <result column="score" jdbcType="INTEGER" property="score" />
+      <result column="required" jdbcType="BIT" property="required" />
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -80,6 +101,18 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+  </select>
+<!--  List<CourseToStudent> selectByExampleWithCourseAndTeacher(Integer studentId);-->
+  <select id="selectByExampleWithCourseAndTeacher" resultMap="BaseResultMapWithCourseAndTeacher">
+    SELECT c.*,t.*,c.name as cname,t.name as tname,c.id as cid, cs.id as csid
+    FROM course_to_student cs
+    LEFT JOIN course_to_teacher ct
+    ON cs.course_to_teacher_id = ct.id
+    LEFT JOIN course c
+    ON ct.course_id = c.id
+    LEFT JOIN teacher t
+    ON ct.teacher_id = t.id
+    WHERE cs.student_id = #{studentId}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

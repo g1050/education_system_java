@@ -32,7 +32,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations={"classpath:applicationContext.xml","file:src/main/webapp/WEB-INF/dispatcherServlet-servlet.xml"})
-public class MvcTest {
+public class TestMVC {
 
     //´«ÈëspringMvcµÄioc
     @Autowired

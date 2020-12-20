@@ -29,4 +29,9 @@ public interface CourseToTeacherMapper {
     int updateByPrimaryKeySelective(CourseToTeacher record);
 
     int updateByPrimaryKey(CourseToTeacher record);
+
+    List<CourseToTeacher> selectByTeacherId(@Param("teacherId")Integer teacherId);
+
+    //获取所有的选修课的老师和课程信息
+    List<CourseToTeacher> selectAllNotRequiredCourse();
 }

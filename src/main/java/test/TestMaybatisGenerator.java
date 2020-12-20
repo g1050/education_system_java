@@ -8,7 +8,7 @@ import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
-public class test {
+public class TestMaybatisGenerator {
 	public static void main(String[] args) throws Exception, Exception {
 		System.out.println("Hello World!");
 

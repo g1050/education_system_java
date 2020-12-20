@@ -25,6 +25,7 @@ public class CourseController {
 
     @Autowired  //自动注入函数内容
     CourseService courseService;
+
     @RequestMapping(value = "",method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage test(@RequestParam(value="page", defaultValue = "1")   Integer page,
@@ -38,6 +39,23 @@ public class CourseController {
         //从数据库获取信息
         //返回信息
     }
+
+    //获取所有选修课程
+    //localhost:8080/api/course/notrequired
+    @RequestMapping(value = "/notrequired",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnMessage getNotRequiredCourse(@RequestParam(value="page", defaultValue = "1")   Integer page,
+                              @RequestParam(value = "limit",defaultValue = "100") Integer limit){
+        System.out.println(page);
+        System.out.println(limit);
+        PageHelper.startPage(page,limit);
+        List<Course> list = courseService.getAllNotRequired();
+        PageInfo pageInfo = new PageInfo(list, 5);
+        return ReturnMessage.success().add("pageInfo",pageInfo);
+        //从数据库获取信息
+        //返回信息
+    }
+
     //获取所有课程信息
     @RequestMapping(value = "/all")
     @ResponseBody
