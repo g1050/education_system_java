@@ -5,9 +5,11 @@ import com.github.pagehelper.PageInfo;
 import hm.com.bean.Class;
 import hm.com.bean.Dormitory;
 import hm.com.bean.Manager;
+import hm.com.bean.Teacher;
 import hm.com.util.ReturnMessage;
 import hm.com.service.ClassService;
 //import net.sf.json.JSONObject;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -112,7 +114,7 @@ public class ClassController {
             return ReturnMessage.fail();
     }
 
-    //查询
+    //根据学院查询
     @RequestMapping(value = "/bycollege",method = RequestMethod.POST)
     @ResponseBody
     public ReturnMessage getClassByCollege(@RequestParam(value = "college",defaultValue = "")String college ){
@@ -125,14 +127,14 @@ public class ClassController {
         System.out.println(college);
         return  ReturnMessage.success().add("pageInfo",list);
     }
-    //查询
+    //根据名称查询
     @RequestMapping(value = "/byname",method = RequestMethod.POST)
     @ResponseBody
     public ReturnMessage getClassByName(@RequestParam(value = "searchParams")String searchParams,
                                         @RequestParam(value = "page",defaultValue = "")Integer page,
                                         @RequestParam(value = "limit",defaultValue = "")Integer limit){
         Map<String, String> map = new HashMap<String, String>();
-//        map = JSONObject.fromObject(searchParams);
+        map = JSONObject.fromObject(searchParams);
 
         String name = map.get("name");
         System.out.println("page");
@@ -151,5 +153,36 @@ public class ClassController {
         PageInfo pageInfo = new PageInfo(aclass,5);
         System.out.println(name);
         return  ReturnMessage.success().add("pageInfo",pageInfo);
+    }
+
+    //多条件查询
+    @RequestMapping(value = "/bymore",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnMessage getTeacherByMore(@RequestParam(value = "searchParams")String searchParams,
+                                          @RequestParam(value = "page",defaultValue = "")Integer page,
+                                          @RequestParam(value = "limit",defaultValue = "")Integer limit){
+        Map<String, String> map = new HashMap<String, String>();
+        map = JSONObject.fromObject(searchParams);
+        String college = map.get("college");
+        String className = map.get("name");
+        System.out.println("page");
+        System.out.println("limit");
+
+        List<Class> classes = null;
+        if(className.equals("")&&college.equals("")){
+            classes = classService.getAll();
+        }else if(className.equals("")){
+            classes = classService.getClassByCollege(college);
+        }else if(college.equals("")){
+            classes = classService.getClassByName(className);
+        }else{
+            classes = classService.getClassByMore(college,className);
+        }
+
+        PageHelper.startPage(page,limit);
+
+        PageInfo pageInfo = new PageInfo(classes,5);
+
+        return ReturnMessage.success().add("pageInfo",pageInfo);
     }
 }

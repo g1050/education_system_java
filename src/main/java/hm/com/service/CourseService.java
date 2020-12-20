@@ -8,6 +8,7 @@ import hm.com.dao.CourseToTeacherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.Class;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -90,5 +91,41 @@ public class CourseService {
 
         return courseMapper.selectByExample(example);
 //        return null;
+    }
+    //字段查询
+    public List<Course> getCourseByCollege(String college) {
+        List <Course> all = getAll();
+        List<Course> list = new ArrayList<Course>();
+
+        for(Course course : all){
+            if(course.getCollege().getName().equals(college)){
+                list.add(course);
+            }
+        }
+        return list;
+    }
+
+    public List<Course> getCourseByName(String courseName) {
+        List<Course> all = getAll();
+        List<Course> list = new ArrayList<Course>();
+
+        for(Course course : all){
+            if(course.getName().equals(courseName)){
+                list.add(course);
+            }
+        }
+        return list;
+    }
+
+    public List<Course> getCourseByMore(String college, String courseName) {
+        List<Course> all = getAll();
+        List<Course> list = new ArrayList<Course>();
+
+        for (Course course : all){
+            if (course.getCollege().getName().equals(college) && course.getName().equals(courseName)){
+                list.add(course);
+            }
+        }
+        return list;
     }
 }

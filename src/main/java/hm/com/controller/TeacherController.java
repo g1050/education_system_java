@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.bean.Club;
 import hm.com.bean.CourseToTeacher;
+import hm.com.bean.Student;
 import hm.com.bean.Teacher;
 import hm.com.util.ReturnMessage;
 import net.sf.json.JSONObject;
@@ -148,6 +149,62 @@ public class TeacherController {
         PageInfo pageInfo = new PageInfo(teachers,5);
         System.out.println(college);
         return  ReturnMessage.success().add("pageInfo",pageInfo);
+    }
+    //姓名查询
+    @RequestMapping(value = "/byname",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnMessage getTeacherByName(@RequestParam(value = "searchParams")String searchParams,
+                                          @RequestParam(value = "page",defaultValue = "")Integer page,
+                                          @RequestParam(value = "limit",defaultValue = "")Integer limit){
+        Map<String, String> map = new HashMap<String, String>();
+        map = JSONObject.fromObject(searchParams);
+        String teacherName = map.get("name");
+        System.out.println("page");
+        System.out.println("limit");
+
+        List<Teacher> teachers = null;
+        if (teacherName.equals("")){
+            teachers = teacherService.getAll();
+        }else{
+            teachers = teacherService.getTeacherByName(teacherName);
+        }
+        //引入pageHelper插件
+        PageHelper.startPage(page,limit);
+        //包装一下数据
+        PageInfo pageInfo = new PageInfo(teachers,5);
+        System.out.println(teacherName);
+        return ReturnMessage.success().add("pageInfo",pageInfo);
+    }
+
+    //多条件查询
+    @RequestMapping(value = "/bymore",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnMessage getTeacherByMore(@RequestParam(value = "searchParams")String searchParams,
+                                          @RequestParam(value = "page",defaultValue = "")Integer page,
+                                          @RequestParam(value = "limit",defaultValue = "")Integer limit){
+        Map<String, String> map = new HashMap<String, String>();
+        map = JSONObject.fromObject(searchParams);
+        String college = map.get("college");
+        String teacherName = map.get("name");
+        System.out.println("page");
+        System.out.println("limit");
+
+        List<Teacher> teachers = null;
+        if(teacherName.equals("")&&college.equals("")){
+            teachers = teacherService.getAll();
+        }else if(teacherName.equals("")){
+            teachers = teacherService.getTeacherByCollege(college);
+        }else if(college.equals("")){
+            teachers = teacherService.getTeacherByName(teacherName);
+        }else{
+            teachers = teacherService.getTeacherByMore(college,teacherName);
+        }
+
+        PageHelper.startPage(page,limit);
+
+        PageInfo pageInfo = new PageInfo(teachers,5);
+
+        return ReturnMessage.success().add("pageInfo",pageInfo);
     }
 
 }

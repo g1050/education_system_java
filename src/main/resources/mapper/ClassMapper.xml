@@ -112,8 +112,8 @@
       distinct
     </if>
     <include refid="Major_Column_List" />
-    FROM class c LEFT JOIN major m
-    ON c.major_id=m.id
+    FROM (class c LEFT JOIN major m
+    ON c.major_id=m.id)
     LEFT JOIN college b ON c.college_id=b.id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
