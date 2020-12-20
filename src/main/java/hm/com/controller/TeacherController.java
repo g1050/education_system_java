@@ -6,6 +6,7 @@ import hm.com.bean.Club;
 import hm.com.bean.CourseToTeacher;
 import hm.com.bean.Student;
 import hm.com.bean.Teacher;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.Map;
 
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/teacher")
+@RequestMapping(Constant.PREFIX+"/teacher")
 public class TeacherController {
 
     @Autowired

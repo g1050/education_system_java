@@ -3,6 +3,7 @@ package hm.com.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.service.CourseToTeacherService;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/c2t")
+@RequestMapping(Constant.PREFIX+"/c2t")
 public class CourseToTeacherController {
     @Autowired
     CourseToTeacherService courseToTeacherService;

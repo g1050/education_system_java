@@ -28,6 +28,7 @@
 	<!-- 能支持springmvc更高级的一些功能，JSR303校验，快捷的ajax... -->
 	<mvc:annotation-driven/>
 
+
 <!--	配置拦截器-->
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -35,4 +36,5 @@
 			<bean class="hm.com.interceptor.Interceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
+
 </beans>

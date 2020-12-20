@@ -6,6 +6,7 @@ import hm.com.bean.Class;
 import hm.com.bean.Dormitory;
 import hm.com.bean.Manager;
 import hm.com.bean.Teacher;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import hm.com.service.ClassService;
 //import net.sf.json.JSONObject;
@@ -29,7 +30,7 @@ import java.util.Map;
  */
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/class")
+@RequestMapping(Constant.PREFIX+"/class")
 public class ClassController {
 
     @Autowired

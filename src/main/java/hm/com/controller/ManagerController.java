@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.bean.Manager;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import hm.com.service.ManagerService;
 //import net.sf.json.JSONObject;
@@ -25,7 +26,7 @@ import java.util.*;
 @Controller
 @CrossOrigin(origins = "*")
 //localhost:8080/api/manager
-@RequestMapping("/manager")
+@RequestMapping(Constant.PREFIX+"/manager")
 public class ManagerController {
 
     @Autowired

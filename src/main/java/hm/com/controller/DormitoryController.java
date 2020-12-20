@@ -3,6 +3,7 @@ package hm.com.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.bean.Dormitory;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import hm.com.service.DormitoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/dormitory")
+@RequestMapping(Constant.PREFIX+"/dormitory")
 public class DormitoryController {
 
     @Autowired

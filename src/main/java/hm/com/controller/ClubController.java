@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import hm.com.bean.Club;
 import hm.com.bean.Teacher;
 import hm.com.service.ClubService;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import java.util.Map;
 
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/club")
+@RequestMapping(Constant.PREFIX+"/club")
 public class ClubController {
     @Autowired
     ClubService clubService;

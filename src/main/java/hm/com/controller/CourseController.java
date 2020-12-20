@@ -3,6 +3,7 @@ package hm.com.controller;
 
 import hm.com.bean.Club;
 import hm.com.bean.Teacher;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 @Controller
 @CrossOrigin("*")
-@RequestMapping("/course")
+@RequestMapping(Constant.PREFIX+"/course")
 public class CourseController {
 
     @Autowired  //自动注入函数内容

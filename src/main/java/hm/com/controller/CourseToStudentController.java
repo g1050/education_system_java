@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import hm.com.bean.CourseToStudent;
 import hm.com.bean.CourseToTeacher;
 import hm.com.service.CourseToStudentService;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/c2s")
+@RequestMapping(Constant.PREFIX+"/c2s")
 public class CourseToStudentController {
     @Autowired
     CourseToStudentService courseToStudentService;

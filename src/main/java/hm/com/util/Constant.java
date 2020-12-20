@@ -8,4 +8,6 @@ package hm.com.util;
  * @version: $
  */
 public class Constant {
+    public final static String TOKEN = "access_token";
+    public final static String PREFIX = "/api";
 }

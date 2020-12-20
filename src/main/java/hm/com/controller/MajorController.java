@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.bean.College;
 import hm.com.bean.Major;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import hm.com.service.MajorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/major")
+@RequestMapping(Constant.PREFIX+"/major")
 public class MajorController {
 
     @Autowired

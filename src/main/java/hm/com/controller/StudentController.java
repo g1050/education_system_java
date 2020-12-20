@@ -1,6 +1,7 @@
 package hm.com.controller;
 
 import hm.com.bean.Teacher;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -18,8 +19,8 @@ import java.util.Map;
 
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/student")
-class StudentController {
+@RequestMapping(Constant.PREFIX+"/student")
+public class StudentController {
     @Autowired
     StudentService studentService;
 

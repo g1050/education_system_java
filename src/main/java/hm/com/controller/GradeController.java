@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import hm.com.bean.College;
 import hm.com.bean.Grade;
 import hm.com.service.GradeService;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/grade")
+@RequestMapping(Constant.PREFIX+"/grade")
 public class GradeController {
     @Autowired
     GradeService gradeService;

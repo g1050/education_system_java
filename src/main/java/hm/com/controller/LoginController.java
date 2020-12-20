@@ -2,6 +2,7 @@ package hm.com.controller;
 
 import hm.com.bean.Role;
 import hm.com.service.RoleService;
+import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
 import hm.com.service.ManagerService;
 import hm.com.util.JWTUtils;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/login")
+@RequestMapping(value = Constant.PREFIX+"/login")
 public class LoginController {
 
     @Autowired

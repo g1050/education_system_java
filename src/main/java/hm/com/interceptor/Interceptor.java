@@ -1,5 +1,6 @@
 package hm.com.interceptor;
 
+import hm.com.util.Constant;
 import net.sf.json.JSONObject;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +25,9 @@ public class Interceptor implements HandlerInterceptor {
             return true;
         }
 
+        //»ñÈ¡token
+        String token = request.getHeader(Constant.TOKEN);
+        System.out.println(token);
         Boolean b = true;
         //À¹½Ø,·µ»ØJson
         if(!b){
