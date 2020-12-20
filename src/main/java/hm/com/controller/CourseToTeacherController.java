@@ -80,12 +80,13 @@ public class CourseToTeacherController {
 
     //根据老师id获取所有的课程信息
     //localhost:8080/api/c2t/course/byteacher/1
-    @RequestMapping(value = "/course/byteacher/{teacherId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/course/byteacher",method = RequestMethod.GET)
     @ResponseBody
-    public ReturnMessage getCourseByTeacherId(@PathVariable("teacherId")Integer teacherId,
+    public ReturnMessage getCourseByTeacherId(HttpServletRequest request,
                                               @RequestParam(value = "page",defaultValue = "1")Integer page,
                                               @RequestParam(value = "limit",defaultValue = "5")Integer limit){
-
+        Integer teacherId = (Integer) request.getAttribute(Constant.OLDID);
+        System.out.println("teacherId = " + teacherId);
         PageHelper.startPage(page,limit);
         //根据teacherId获取所有course
         List<hm.com.bean.CourseToTeacher> list = courseToTeacherService.getCourseByTeacherId(teacherId);

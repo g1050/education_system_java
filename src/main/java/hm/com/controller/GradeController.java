@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -36,11 +37,13 @@ public class GradeController {
     }
 
     //localhost:8080/api/grade/bystudent/29
-    @RequestMapping(value = "/bystudent/{studentId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/bystudent",method = RequestMethod.GET)
     @ResponseBody
-    public ReturnMessage getGrade(@PathVariable("studentId")Integer studentId,
+    public ReturnMessage getGrade(HttpServletRequest request,
+//                                @PathVariable("studentId")Integer studentId,
                                   @RequestParam(value = "page",defaultValue = "1")Integer page,
                                   @RequestParam(value = "limit",defaultValue = "10")Integer limit){
+        Integer studentId = (Integer) request.getAttribute(Constant.OLDID);
         List<Grade> list = gradeService.getGrade(studentId);
         PageHelper.startPage(page,limit);
         PageInfo pageInfo = new PageInfo(list,5);
