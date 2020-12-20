@@ -49,7 +49,7 @@ public class CourseToStudentController {
         return ReturnMessage.success().add("pageInfo",pageInfo);
     }
 
-    //根据c2tid获取所有学生
+    //根据c2tid获取所有学生,包含成绩信息
     //localhost:8080/api/c2s/student/byc2t/2
     @RequestMapping(value = "/student/byc2t/{c2tId}",method = RequestMethod.GET)
     @ResponseBody

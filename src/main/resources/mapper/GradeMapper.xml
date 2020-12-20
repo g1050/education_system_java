@@ -7,6 +7,29 @@
     <result column="course_id" jdbcType="INTEGER" property="courseId" />
     <result column="student_id" jdbcType="INTEGER" property="studentId" />
   </resultMap>
+  <resultMap id="BaseResultMapWithCourse" type="hm.com.bean.Grade">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="course_id" jdbcType="INTEGER" property="courseId" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <association property="course" javaType="hm.com.bean.Course">
+      <id column="cid" jdbcType="INTEGER" property="id" />
+      <result column="cname" jdbcType="VARCHAR" property="name" />
+      <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+      <result column="class_hour" jdbcType="INTEGER" property="classHour" />
+      <result column="score" jdbcType="INTEGER" property="score" />
+      <result column="required" jdbcType="BIT" property="required" />
+    </association>
+  </resultMap>
+<!--  List<Grade> selectByStudentId(@Param("studentId")Integer studentId);-->
+  <select id="selectByStudentId"  resultMap="BaseResultMapWithCourse">
+    SELECT *,c.id as cid,c.name as cname
+    FROM grade g
+    LEFT JOIN course c
+    ON g.course_id = c.id
+    WHERE g.student_id = #{studentId}
+  </select>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

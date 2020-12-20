@@ -29,6 +29,7 @@
   </resultMap>
   <resultMap id="BaseResultMapWithStudent" type="hm.com.bean.CourseToStudent">
     <id column="csid" jdbcType="INTEGER" property="id" />
+    <result column="ggrade" jdbcType="INTEGER" property="grade" />
     <result column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="course_to_teacher_id" jdbcType="INTEGER" property="courseToTeacherId" />
     <association property="student" javaType="hm.com.bean.Student">
@@ -129,14 +130,17 @@
     WHERE cs.student_id = #{studentId}
   </select>
 <!--  List<CourseToStudent> selectStudentByC2tId(@Param("c2tId")Integer c2tId);-->
+<!--  添加成绩信息-->
   <select id="selectStudentByC2tId" resultMap="BaseResultMapWithStudent">
-    SELECT s.id as sid,s.college_id as scollege_id,s.name as sname,s.phone as sphone,s.email as semail,
+    SELECT s.id as sid,s.college_id as scollege_id,s.name as sname,s.phone as sphone,s.email as semail,g.grade as ggrade,
     s.sex as ssex,s.id_card as sid_card
     FROM course_to_student cs
     LEFT JOIN student s
     ON cs.student_id = s.id
     LEFT JOIN course_to_teacher ct
     ON ct.id = cs.course_to_teacher_id
+    LEFT JOIN grade g
+    ON s.id = g.student_id and g.course_id = ct.course_id
     WHERE ct.id = #{c2tId}
     and s.id is not null
   </select>

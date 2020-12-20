@@ -27,4 +27,6 @@ public interface GradeMapper {
     int updateByPrimaryKeySelective(Grade record);
 
     int updateByPrimaryKey(Grade record);
+
+    List<Grade> selectByStudentId(@Param("studentId")Integer studentId);
 }

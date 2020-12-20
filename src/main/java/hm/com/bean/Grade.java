@@ -1,6 +1,8 @@
 package hm.com.bean;
 
 public class Grade {
+    private Course course;
+
     private Integer id;
 
     private Integer grade;
@@ -39,5 +41,13 @@ public class Grade {
 
     public void setStudentId(Integer studentId) {
         this.studentId = studentId;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }
