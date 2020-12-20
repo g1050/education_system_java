@@ -40,4 +40,8 @@ public class CourseToStudentService {
     public void deleteCourse2Teacher(Integer id) {
          courseToStudentMapper.deleteByPrimaryKey(id);
     }
+
+    public List<CourseToStudent> getStudentByC2tId(Integer c2tId) {
+        return courseToStudentMapper.selectStudentByC2tId(c2tId);
+    }
 }

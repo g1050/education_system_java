@@ -29,4 +29,6 @@ public interface CourseToStudentMapper {
     int updateByPrimaryKey(CourseToStudent record);
 
     List<CourseToStudent> selectByExampleWithCourseAndTeacher(@Param("studentId")Integer studentId);
+
+    List<CourseToStudent> selectStudentByC2tId(@Param("c2tId")Integer c2tId);
 }

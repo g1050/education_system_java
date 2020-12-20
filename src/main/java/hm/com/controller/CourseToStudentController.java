@@ -45,7 +45,20 @@ public class CourseToStudentController {
         PageHelper.startPage(page,limit);
         //根据courseId获取所有老师
         List<CourseToStudent> list = courseToStudentService.getCourseByStudentId(studentId);
-        System.out.println("list size " + list.size());
+        PageInfo pageInfo = new PageInfo(list,limit);
+        return ReturnMessage.success().add("pageInfo",pageInfo);
+    }
+
+    //根据c2tid获取所有学生
+    //localhost:8080/api/c2s/student/byc2t//2
+    @RequestMapping(value = "/student/byc2t/{c2tId}",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnMessage getStudentByC2tId(@PathVariable("c2tId")Integer c2tId,
+                                              @RequestParam(value = "page",defaultValue = "1")Integer page,
+                                              @RequestParam(value = "limit",defaultValue = "5")Integer limit){
+        PageHelper.startPage(page,limit);
+        //根据courseId获取所有老师
+        List<CourseToStudent> list = courseToStudentService.getStudentByC2tId(c2tId);
         PageInfo pageInfo = new PageInfo(list,limit);
         return ReturnMessage.success().add("pageInfo",pageInfo);
     }

@@ -27,6 +27,20 @@
       <result column="required" jdbcType="BIT" property="required" />
     </association>
   </resultMap>
+  <resultMap id="BaseResultMapWithStudent" type="hm.com.bean.CourseToStudent">
+    <id column="csid" jdbcType="INTEGER" property="id" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="course_to_teacher_id" jdbcType="INTEGER" property="courseToTeacherId" />
+    <association property="student" javaType="hm.com.bean.Student">
+      <id column="sid" jdbcType="INTEGER" property="id" />
+      <result column="scollege_id" jdbcType="INTEGER" property="collegeId" />
+      <result column="sname" jdbcType="VARCHAR" property="name" />
+      <result column="sphone" jdbcType="VARCHAR" property="phone" />
+      <result column="semail" jdbcType="VARCHAR" property="email" />
+      <result column="ssex" jdbcType="BIT" property="sex" />
+      <result column="sid_card" jdbcType="VARCHAR" property="idCard" />
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -113,6 +127,18 @@
     LEFT JOIN teacher t
     ON ct.teacher_id = t.id
     WHERE cs.student_id = #{studentId}
+  </select>
+<!--  List<CourseToStudent> selectStudentByC2tId(@Param("c2tId")Integer c2tId);-->
+  <select id="selectStudentByC2tId" resultMap="BaseResultMapWithStudent">
+    SELECT s.id as sid,s.college_id as scollege_id,s.name as sname,s.phone as sphone,s.email as semail,
+    s.sex as ssex,s.id_card as sid_card
+    FROM course_to_student cs
+    LEFT JOIN student s
+    ON cs.student_id = s.id
+    LEFT JOIN course_to_teacher ct
+    ON ct.id = cs.course_to_teacher_id
+    WHERE ct.id = #{c2tId}
+    and s.id is not null
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
