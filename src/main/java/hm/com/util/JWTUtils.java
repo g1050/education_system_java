@@ -23,9 +23,7 @@ import java.util.Map;
  * @author zm
  **/
 public class JWTUtils {
-    //设置过期时间
-//    private static final long EXPIRE_DATE=30*60*10000; //50h
-    private static final long EXPIRE_DATE= 60*1000; // 1min
+
 
     //token秘钥
     private static final String TOKEN_SECRET = "ZCfasfhuaUUHufguGuwu2020BQWE";
@@ -35,7 +33,7 @@ public class JWTUtils {
         String token = "";
         try {
             //过期时间
-            Date date = new Date(System.currentTimeMillis()+EXPIRE_DATE);
+            Date date = new Date(System.currentTimeMillis()+Constant.EXPIRE_DATE);
             //秘钥及加密算法
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             //设置头部信息

@@ -1,6 +1,7 @@
 package hm.com.interceptor;
 
 import hm.com.util.Constant;
+import hm.com.util.JWTUtils;
 import net.sf.json.JSONObject;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,14 +25,35 @@ public class Interceptor implements HandlerInterceptor {
         if(request.getRequestURI().contains("login")){
             return true;
         }
+        //放行OPTIONS请求
+        String method = request.getMethod();
+        if ("OPTIONS".equals(method)) {
+            return true;
+        }
 
         //获取token
         String token = request.getHeader(Constant.TOKEN);
-        System.out.println(token);
-        Boolean b = true;
+        System.out.println("token" + token);
+        if(token == null){
+            System.out.println("token is null");
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Cache-Control","no-cache");
+            response.setContentType("application/json; charset=utf-8");
+            PrintWriter out = null;
+            JSONObject res = new JSONObject();
+            res.put("code", 200);
+            res.put("message", "请求没有token");
+            out = response.getWriter();
+            out.append(res.toString());
+            return false;
+        }
+        Boolean b = JWTUtils.verify(token);
         //拦截,返回Json
         if(!b){
             response.setCharacterEncoding("UTF-8");
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Cache-Control","no-cache");
             response.setContentType("application/json; charset=utf-8");
             PrintWriter out = null;
             JSONObject res = new JSONObject();
@@ -41,6 +63,7 @@ public class Interceptor implements HandlerInterceptor {
             out.append(res.toString());
             return false;
         }
+        request.setAttribute(Constant.OLDID,JWTUtils.getOldId(token));
         return true;
     }
 

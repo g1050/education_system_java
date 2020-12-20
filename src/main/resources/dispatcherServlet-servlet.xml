@@ -32,7 +32,7 @@
 <!--	配置拦截器-->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
+			<mvc:mapping path="/api/**"/>
 			<bean class="hm.com.interceptor.Interceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

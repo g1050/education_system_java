@@ -10,4 +10,8 @@ package hm.com.util;
 public class Constant {
     public final static String TOKEN = "access_token";
     public final static String PREFIX = "/api";
+    public final static String OLDID = "old_id";
+    //设置过期时间
+    //private static final long EXPIRE_DATE=30*60*10000; //50h
+    public static final long EXPIRE_DATE= 60*1000*60; // 60min
 }
