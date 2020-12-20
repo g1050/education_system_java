@@ -92,7 +92,6 @@ public class CourseService {
         return courseMapper.selectByExample(example);
 //        return null;
     }
-<<<<<<< HEAD
     //字段查询
     public List<Course> getCourseByCollege(String college) {
         List <Course> all = getAll();
@@ -122,20 +121,19 @@ public class CourseService {
         List<Course> all = getAll();
         List<Course> list = new ArrayList<Course>();
 
-        for (Course course : all){
-            if (course.getCollege().getName().equals(college) && course.getName().equals(courseName)){
+        for (Course course : all) {
+            if (course.getCollege().getName().equals(college) && course.getName().equals(courseName)) {
                 list.add(course);
             }
         }
         return list;
-=======
+    }
 
-    public List<Course> getAllNotRequired() {
+    public List<Course> getAllNotRequired(){
         CourseExample example = new CourseExample();
         CourseExample.Criteria criteria = example.createCriteria();
         criteria.andRequiredEqualTo(false);
 
         return courseMapper.selectByExample(example);
->>>>>>> ce5f1926ab3f0777a5f650491fee5330851b2317
     }
 }

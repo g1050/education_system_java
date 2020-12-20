@@ -43,10 +43,6 @@ public class StudentService {
     }
 
 
-<<<<<<< HEAD
-        courseToStudentMapper.insert(courseToStudent);
-    }
-
     public List<Student> getStudentByName(String studentName) {
         List<Student> all = getAll();
         List<Student> list = new ArrayList<Student>();
@@ -83,7 +79,6 @@ public class StudentService {
         }
         return list;
     }
-=======
->>>>>>> ce5f1926ab3f0777a5f650491fee5330851b2317
+
 }
 
