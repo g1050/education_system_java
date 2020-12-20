@@ -2,7 +2,9 @@ package hm.com.service;
 import hm.com.bean.*;
 import hm.com.bean.Class;
 import hm.com.dao.CourseToStudentMapper;
+import hm.com.dao.RoleMapper;
 import hm.com.dao.StudentMapper;
+import hm.com.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,10 +18,25 @@ import java.util.List;
 public class StudentService {
     @Autowired
     StudentMapper studentMapper;
-
+    @Autowired
+    RoleMapper roleMapper;
 
     public void addStudent(Student student) {
-         studentMapper.insertSelective(student);
+            studentMapper.insertSelective(student);
+            StudentExample example = new StudentExample();
+            StudentExample.Criteria criteria = example.createCriteria();
+            criteria.andNameEqualTo(student.getName()).andIdCardEqualTo(student.getIdCard());
+            List<Student> students = studentMapper.selectByExample(example);
+            //插入数据到role表
+            if(students.size() > 0){
+                Student managerRt = students.get(0);
+                Role role = new Role();
+                role.setOldId(managerRt.getId());
+                role.setUsername(managerRt.getName());
+                role.setPassword(Constant.DEFAULTPASSWORD);//默认密码
+                role.setRole(Constant.STUDENT);
+                roleMapper.insert(role);
+            }
          return;
     }
 

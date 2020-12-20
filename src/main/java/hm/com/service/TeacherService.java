@@ -2,7 +2,9 @@ package hm.com.service;
 
 import hm.com.bean.*;
 import hm.com.dao.CourseToTeacherMapper;
+import hm.com.dao.RoleMapper;
 import hm.com.dao.TeacherMapper;
+import hm.com.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,9 @@ public class TeacherService {
     TeacherMapper teacherMapper;
 
     @Autowired
+    RoleMapper roleMapper;
+
+    @Autowired
     CourseToTeacherMapper courseToTeacherMapper;
 
     public List<Teacher> getAll() {
@@ -32,6 +37,20 @@ public class TeacherService {
 
     public void addTeacher(Teacher teacher){
         teacherMapper.insertSelective(teacher);
+        TeacherExample example = new TeacherExample();
+        TeacherExample.Criteria criteria = example.createCriteria();
+        criteria.andNameEqualTo(teacher.getName()).andAddressEqualTo(teacher.getAddress());
+        List<Teacher> teachers = teacherMapper.selectByExample(example);
+        //插入数据到role表
+        if(teachers.size() > 0){
+            Teacher managerRt = teachers.get(0);
+            Role role = new Role();
+            role.setOldId(managerRt.getId());
+            role.setUsername(managerRt.getName());
+            role.setPassword(Constant.DEFAULTPASSWORD);//默认密码
+            role.setRole(Constant.TEACHER);
+            roleMapper.insert(role);
+        }
         return;
     }
 

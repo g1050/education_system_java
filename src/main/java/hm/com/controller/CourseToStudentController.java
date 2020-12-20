@@ -3,7 +3,6 @@ package hm.com.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.bean.CourseToStudent;
-import hm.com.bean.CourseToTeacher;
 import hm.com.service.CourseToStudentService;
 import hm.com.util.Constant;
 import hm.com.util.ReturnMessage;
