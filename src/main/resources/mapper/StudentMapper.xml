@@ -10,6 +10,19 @@
     <result column="sex" jdbcType="BIT" property="sex" />
     <result column="id_card" jdbcType="VARCHAR" property="idCard" />
   </resultMap>
+<!--  自添-->
+  <resultMap id="ResultMapWithCollege" type="hm.com.bean.Student">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <association property="college" javaType="hm.com.bean.College">
+      <result column="college_name" property="name"/>
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -71,6 +84,10 @@
   <sql id="Base_Column_List">
     id, college_id, name, phone, email, sex, id_card
   </sql>
+<!--  自添-->
+  <sql id="College_Column_List">
+    s.id, s.college_id, s.name, s.phone, s.email, s.sex, s.id_card, c.name as college_name
+  </sql>
   <select id="selectByExample" parameterType="hm.com.bean.StudentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -78,6 +95,22 @@
     </if>
     <include refid="Base_Column_List" />
     from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+<!--  List<Student> selectByExampleWithCollege(StudentExample example);-->
+  <select id="selectByExampleWithCollege" parameterType="hm.com.bean.StudentExample" resultMap="ResultMapWithCollege">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="College_Column_List" />
+    FROM student s
+    LEFT JOIN college c ON s.college_id=c.id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

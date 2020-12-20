@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class StudentService {
@@ -23,7 +24,7 @@ public class StudentService {
     }
 
     public List<Student> getAll() {
-        List<Student> data = studentMapper.selectByExample(null);
+        List<Student> data = studentMapper.selectByExampleWithCollege(null);
         return data;
     }
     public void deleteStudent(int parseInt){
@@ -42,5 +43,47 @@ public class StudentService {
     }
 
 
+<<<<<<< HEAD
+        courseToStudentMapper.insert(courseToStudent);
+    }
+
+    public List<Student> getStudentByName(String studentName) {
+        List<Student> all = getAll();
+        List<Student> list = new ArrayList<Student>();
+
+        for(Student student : all){
+            if(student.getName().equals(studentName)){
+                System.out.println(student.getName());
+                list.add(student);
+            }
+        }
+        return list;
+    }
+
+    public List<Student> getStudentByCollege(String college) {
+        List<Student> all = getAll();
+        List<Student> list = new ArrayList<Student>();
+
+        for(Student student : all){
+            if(student.getCollege().getName().equals(college)){
+                list.add(student);
+            }
+        }
+        return list;
+    }
+
+    public List<Student> getStudentByMore(String college, String studentName) {
+        List<Student> all = getAll();
+        List<Student> list = new ArrayList<Student>();
+
+        for(Student student : all){
+            if(student.getCollege().getName().equals(college) && student.getName().equals(studentName)){
+                list.add(student);
+            }
+        }
+        return list;
+    }
+=======
+>>>>>>> ce5f1926ab3f0777a5f650491fee5330851b2317
 }
 

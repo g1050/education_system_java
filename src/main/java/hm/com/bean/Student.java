@@ -3,6 +3,8 @@ package hm.com.bean;
 public class Student {
     private Integer id;
 
+    private College college;
+
     private Integer collegeId;
 
     private String name;
@@ -69,5 +71,13 @@ public class Student {
 
     public void setIdCard(String idCard) {
         this.idCard = idCard == null ? null : idCard.trim();
+    }
+
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
     }
 }

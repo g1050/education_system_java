@@ -62,4 +62,12 @@ public class Course {
     public void setRequired(Boolean required) {
         this.required = required;
     }
+
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
+    }
 }

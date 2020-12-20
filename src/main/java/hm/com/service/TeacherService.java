@@ -1,9 +1,6 @@
 package hm.com.service;
 
-import hm.com.bean.CourseToTeacher;
-import hm.com.bean.CourseToTeacherExample;
-import hm.com.bean.Teacher;
-import hm.com.bean.TeacherExample;
+import hm.com.bean.*;
 import hm.com.dao.CourseToTeacherMapper;
 import hm.com.dao.TeacherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +90,7 @@ public class TeacherService {
         return;
     }
 
-
+    //学院查询
     public List<Teacher> getTeacherByCollege(String college) {
         List<Teacher> all = getAll();
         List<Teacher> list = new ArrayList<Teacher>();
@@ -105,4 +102,31 @@ public class TeacherService {
         }
         return list;
     }
+    //姓名查询
+    public List<Teacher> getTeacherByName(String teacherName) {
+        List<Teacher> all = getAll();
+        List<Teacher> list = new ArrayList<Teacher>();
+
+        for(Teacher teacher : all){
+            if(teacher.getName().equals(teacherName)){
+                System.out.println(teacher.getName());
+                list.add(teacher);
+            }
+        }
+        return list;
+    }
+
+    //多条件查询
+    public List<Teacher> getTeacherByMore(String college,String teacherName){
+        List<Teacher> all = getAll();
+        List<Teacher> list = new ArrayList<Teacher>();
+
+        for(Teacher teacher : all){
+            if(teacher.getCollege().getName().equals(college) && teacher.getName().equals(teacherName)){
+                list.add(teacher);
+            }
+        }
+        return list;
+    }
+
 }

@@ -54,7 +54,7 @@ public class ClassService {
     public int  updateClass(Class classa) {
         return classMapper.updateByPrimaryKeySelective(classa);
     }
-
+    //学院查询
     public List<Class> getClassByCollege(String collegeName) {
         List <Class> all = getAll();
         List <Class> res = new ArrayList<Class>();
@@ -66,7 +66,7 @@ public class ClassService {
         }
         return res;
     }
-
+    //名称查询
     public List<Class> getClassByName(String name) {
         List <Class> all = getAll();
         List <Class> res = new ArrayList<Class>();
@@ -77,5 +77,17 @@ public class ClassService {
             }
         }
         return res;
+    }
+    //多条件查询
+    public List<Class> getClassByMore(String college, String className) {
+        List<Class> all = getAll();
+        List<Class> list = new ArrayList<Class>();
+
+        for(Class aclass :all){
+            if (aclass.getCollege().getName().equals(college) && aclass.getName().equals(className)){
+                list.add(aclass);
+            }
+        }
+        return list;
     }
 }

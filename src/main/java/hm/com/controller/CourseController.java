@@ -1,17 +1,22 @@
 package hm.com.controller;
 
 
+import hm.com.bean.Club;
+import hm.com.bean.Teacher;
 import hm.com.util.ReturnMessage;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import hm.com.bean.Course;
 import hm.com.service.CourseService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @CrossOrigin("*")
@@ -80,7 +85,7 @@ public class CourseController {
     }
     }
 
-//删除课程 批量单个二合一
+    //删除课程 批量单个二合一
     //单个 前端发送请求localhost:8080/api/college/+删除的id号
     //多个 前端发送请求localhost:8080/api/college/+删除的“01-02-03-06”字符串
     @RequestMapping(value = "/{ids}",method = RequestMethod.DELETE)
@@ -105,6 +110,64 @@ public class CourseController {
         courseService.deleteCourse(Integer.parseInt(ids));
         return ReturnMessage.success();
     }
+    }
+
+    //搜索查询
+    @RequestMapping(value = "/bycollege",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnMessage getClubByCollege(@RequestParam(value = "searchParams")String searchParams,
+                                          @RequestParam(value = "page",defaultValue = "")Integer page,
+                                          @RequestParam(value = "limit",defaultValue = "")Integer limit){
+        Map<String, String> map = new HashMap<String, String>();
+        map = JSONObject.fromObject(searchParams);
+
+        String college = map.get("college");
+        System.out.println(limit);
+        System.out.println(page);
+
+        List<Course> courses = null;
+
+        if(college.equals("")){//返回全部数据
+            courses = courseService.getAll();
+        }else{//只返回所查字段数据
+            courses = courseService.getCourseByCollege(college);
+        }
+        //引入pageHelper插件
+        PageHelper.startPage(page,limit);
+        //包装一下数据
+        PageInfo pageInfo = new PageInfo(courses,5);
+        System.out.println(college);
+        return  ReturnMessage.success().add("pageInfo",pageInfo);
+    }
+    //多条件查询
+    @RequestMapping(value = "/bymore",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnMessage getCourseByMore(@RequestParam(value = "searchParams")String searchParams,
+                                          @RequestParam(value = "page",defaultValue = "")Integer page,
+                                          @RequestParam(value = "limit",defaultValue = "")Integer limit){
+        Map<String, String> map = new HashMap<String, String>();
+        map = JSONObject.fromObject(searchParams);
+        String college = map.get("college");
+        String courseName = map.get("name");
+        System.out.println("page");
+        System.out.println("limit");
+
+        List<Course> courses = null;
+        if(courseName.equals("")&&college.equals("")){
+            courses = courseService.getAll();
+        }else if(courseName.equals("")){
+            courses = courseService.getCourseByCollege(college);
+        }else if(college.equals("")){
+            courses = courseService.getCourseByName(courseName);
+        }else{
+            courses = courseService.getCourseByMore(college,courseName);
+        }
+
+        PageHelper.startPage(page,limit);
+
+        PageInfo pageInfo = new PageInfo(courses,5);
+
+        return ReturnMessage.success().add("pageInfo",pageInfo);
     }
 
     @RequestMapping(value = "/teacher/{teacherId}",method = RequestMethod.GET)

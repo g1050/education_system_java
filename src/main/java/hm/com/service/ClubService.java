@@ -53,13 +53,37 @@ public class ClubService {
 
         return clubMapper.deleteByExample(example);
     }
-
+    //学院查询
     public List<Club> getClubByCollege(String college) {
         List <Club> all = getAll();
         List<Club> list = new ArrayList<Club>();
 
         for(Club club : all){
             if(club.getCollege().getName().equals(college)){
+                list.add(club);
+            }
+        }
+        return list;
+    }
+    //社团名称查询
+    public List<Club> getClubByName(String clubName){
+        List<Club> all = getAll();
+        List<Club> list = new ArrayList<Club>();
+
+        for (Club club : all){
+            if(club.getName().equals(clubName)){
+                list.add(club);
+            }
+        }
+        return list;
+    }
+    //多条件查询
+    public List<Club> getClubByMore(String college, String clubName) {
+        List<Club> all = getAll();
+        List<Club> list = new ArrayList<Club>();
+
+        for (Club club : all){
+            if(club.getCollege().getName().equals(college) && club.getName().equals(clubName)){
                 list.add(club);
             }
         }
