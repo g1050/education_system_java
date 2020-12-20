@@ -1,4 +1,4 @@
-package hm.com.controller;
+package hm.com.interceptor;
 
 import hm.com.util.ReturnMessage;
 import hm.com.service.ManagerService;
@@ -19,12 +19,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @CrossOrigin(origins = "*")
-public class LoginController {
+@RequestMapping(value = "/login")
+public class LoginInterceptor {
 
     @Autowired
     ManagerService managerService;
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "",method = RequestMethod.POST)
     @ResponseBody
     public ReturnMessage login(@RequestParam("username")String username,@RequestParam("password")String password){
 
