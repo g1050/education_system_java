@@ -11,8 +11,9 @@ import java.util.Map;
  * @version: 0.1$
  */
 public class ReturnMessage {
-    //0??? 100???
-    //200 token?§¹????§¹
+    //0³É¹¦
+    //100´íÎó
+    //200 Î´µÇÂ¼
     private int code;
     private String Message;
     //key:"test" value:123
