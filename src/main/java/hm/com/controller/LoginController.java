@@ -1,5 +1,7 @@
-package hm.com.interceptor;
+package hm.com.controller;
 
+import hm.com.bean.Role;
+import hm.com.service.RoleService;
 import hm.com.util.ReturnMessage;
 import hm.com.service.ManagerService;
 import hm.com.util.JWTUtils;
@@ -20,21 +22,23 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @CrossOrigin(origins = "*")
 @RequestMapping(value = "/login")
-public class LoginInterceptor {
+public class LoginController {
 
     @Autowired
-    ManagerService managerService;
+    RoleService roleService;
 
     @RequestMapping(value = "",method = RequestMethod.POST)
     @ResponseBody
     public ReturnMessage login(@RequestParam("username")String username,@RequestParam("password")String password){
 
-        if(!managerService.verify(username,password)){
-            return ReturnMessage.fail();
+        Integer oldId = roleService.verify(username,password);
+        if(oldId == -1){
+            return ReturnMessage.passwordWrong();
+        }else{
+            String token = JWTUtils.token(oldId,username) ;//role为保留功能，暂时没有设计
+            return ReturnMessage.success().add("token",token);
         }
-        String token = JWTUtils.token(username);
 
-        return ReturnMessage.success().add("token",token);
     }
 
 //    @RequestMapping(value = "/",method = RequestMethod.GET)

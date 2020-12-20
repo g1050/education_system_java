@@ -32,5 +32,6 @@
 		<mapper resource="mapper/CourseToTeacherMapper.xml"></mapper>
 		<mapper resource="mapper/CourseToStudentMapper.xml"></mapper>
 		<mapper resource="mapper/GradeMapper.xml"></mapper>
+		<mapper resource="mapper/RoleMapper.xml"></mapper>
 	</mappers>
 </configuration>

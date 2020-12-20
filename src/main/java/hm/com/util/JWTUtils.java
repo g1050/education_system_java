@@ -30,7 +30,7 @@ public class JWTUtils {
     //token秘钥
     private static final String TOKEN_SECRET = "ZCfasfhuaUUHufguGuwu2020BQWE";
 
-    public static String token (String username){
+    public static String token (Integer oldId,String username){
 
         String token = "";
         try {
@@ -45,6 +45,7 @@ public class JWTUtils {
             //携带username，password信息，生成签名
             token = JWT.create()
                     .withHeader(header)
+                    .withClaim("old_id",oldId)
                     .withClaim("username",username)
                     .withExpiresAt(date)
                     .sign(algorithm);
@@ -71,7 +72,7 @@ public class JWTUtils {
         }
     }
 
-    public static String getUsername(String token) throws UnsupportedEncodingException {
+    public static Integer getOldId(String token) throws UnsupportedEncodingException {
             DecodedJWT verifier = null;
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             try {
@@ -84,7 +85,23 @@ public class JWTUtils {
                 // TODO: 处理验证异常
             }
             assert verifier != null;
-            return verifier.getClaim("username").asString();
+            return verifier.getClaim("old_id").asInt();
+    }
+
+    public static String getUsername(String token) throws UnsupportedEncodingException {
+        DecodedJWT verifier = null;
+        Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
+        try {
+            verifier = JWT.require(algorithm).build().verify(token);
+        } catch (Exception e) {
+            System.out.println("get role error");
+            //JSONObject jsonObject = new JSONObject();
+            //jsonObject.put("status", "401");
+            //jsonObject.put("msg", "验证失败，请重新登录!");
+            // TODO: 处理验证异常
+        }
+        assert verifier != null;
+        return verifier.getClaim("username").asString();
     }
 
 

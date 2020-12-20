@@ -14,6 +14,7 @@ public class ReturnMessage {
     //0³É¹¦
     //100´íÎó
     //200 Î´µÇÂ¼
+    //300 ÃÜÂë´íÎó
     private int code;
     private String Message;
     //key:"test" value:123
@@ -30,6 +31,13 @@ public class ReturnMessage {
         ReturnMessage result = new ReturnMessage();
         result.setCode(200);
         result.setMessage("Î´µÇÂ¼");
+        return result;
+    }
+
+    public static ReturnMessage passwordWrong(){
+        ReturnMessage result = new ReturnMessage();
+        result.setCode(300);
+        result.setMessage("ÃÜÂë´íÎó");
         return result;
     }
 

@@ -9,6 +9,8 @@ public class Role {
 
     private String role;
 
+    private Integer oldId;
+
     public Integer getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class Role {
 
     public void setRole(String role) {
         this.role = role == null ? null : role.trim();
+    }
+
+    public Integer getOldId() {
+        return oldId;
+    }
+
+    public void setOldId(Integer oldId) {
+        this.oldId = oldId;
     }
 }

@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hm.com.dao.RoleMapper">
   <resultMap id="BaseResultMap" type="hm.com.bean.Role">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="role" jdbcType="CHAR" property="role" />
+    <result column="old_id" jdbcType="INTEGER" property="oldId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, role
+    id, username, password, role, old_id
   </sql>
   <select id="selectByExample" parameterType="hm.com.bean.RoleExample" resultMap="BaseResultMap">
     select
@@ -82,6 +83,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="hm.com.bean.RoleExample">
     delete from role
     <if test="_parameter != null">
@@ -90,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="hm.com.bean.Role">
     insert into role (id, username, password, 
-      role)
+      role, old_id)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{role,jdbcType=CHAR})
+      #{role,jdbcType=CHAR}, #{oldId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="hm.com.bean.Role">
     insert into role
@@ -109,6 +120,9 @@
       <if test="role != null">
         role,
       </if>
+      <if test="oldId != null">
+        old_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -122,6 +136,9 @@
       </if>
       <if test="role != null">
         #{role,jdbcType=CHAR},
+      </if>
+      <if test="oldId != null">
+        #{oldId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -146,6 +163,9 @@
       <if test="record.role != null">
         role = #{record.role,jdbcType=CHAR},
       </if>
+      <if test="record.oldId != null">
+        old_id = #{record.oldId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -156,9 +176,36 @@
     set id = #{record.id,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      role = #{record.role,jdbcType=CHAR}
+      role = #{record.role,jdbcType=CHAR},
+      old_id = #{record.oldId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="hm.com.bean.Role">
+    update role
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=CHAR},
+      </if>
+      <if test="oldId != null">
+        old_id = #{oldId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hm.com.bean.Role">
+    update role
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      role = #{role,jdbcType=CHAR},
+      old_id = #{oldId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

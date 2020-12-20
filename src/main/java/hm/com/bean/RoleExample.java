@@ -373,6 +373,66 @@ public class RoleExample {
             addCriterion("role not between", value1, value2, "role");
             return (Criteria) this;
         }
+
+        public Criteria andOldIdIsNull() {
+            addCriterion("old_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldIdIsNotNull() {
+            addCriterion("old_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldIdEqualTo(Integer value) {
+            addCriterion("old_id =", value, "oldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldIdNotEqualTo(Integer value) {
+            addCriterion("old_id <>", value, "oldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldIdGreaterThan(Integer value) {
+            addCriterion("old_id >", value, "oldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("old_id >=", value, "oldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldIdLessThan(Integer value) {
+            addCriterion("old_id <", value, "oldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldIdLessThanOrEqualTo(Integer value) {
+            addCriterion("old_id <=", value, "oldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldIdIn(List<Integer> values) {
+            addCriterion("old_id in", values, "oldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldIdNotIn(List<Integer> values) {
+            addCriterion("old_id not in", values, "oldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldIdBetween(Integer value1, Integer value2) {
+            addCriterion("old_id between", value1, value2, "oldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("old_id not between", value1, value2, "oldId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
