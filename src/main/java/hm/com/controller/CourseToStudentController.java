@@ -50,7 +50,7 @@ public class CourseToStudentController {
     }
 
     //根据c2tid获取所有学生
-    //localhost:8080/api/c2s/student/byc2t//2
+    //localhost:8080/api/c2s/student/byc2t/2
     @RequestMapping(value = "/student/byc2t/{c2tId}",method = RequestMethod.GET)
     @ResponseBody
     public ReturnMessage getStudentByC2tId(@PathVariable("c2tId")Integer c2tId,
