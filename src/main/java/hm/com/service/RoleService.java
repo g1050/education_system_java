@@ -21,7 +21,7 @@ public class RoleService {
     RoleMapper roleMapper;
 
     //ÃÜÂëÕıÈ··µ»Øold_id,ÃÜÂë´íÎó·µ»Ø-1
-    public Integer verify(String username, String password) {
+    public Integer verify(String username, String password, StringBuilder role) {
         RoleExample example = new RoleExample();
         RoleExample.Criteria criteria = example.createCriteria();
         criteria.andUsernameEqualTo(username);
@@ -31,9 +31,10 @@ public class RoleService {
             return -1;
         }
 
-        Role role = roles.get(0);
-        if(role.getPassword().equals(password)){
-            return role.getOldId();
+        Role r= roles.get(0);
+        role.append(r.getRole());
+        if(r.getPassword().equals(password)){
+            return r.getOldId();
         }else{
             return -1;
         }

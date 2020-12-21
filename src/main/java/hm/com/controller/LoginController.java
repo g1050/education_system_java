@@ -22,24 +22,31 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping(value = Constant.PREFIX+"/login")
 public class LoginController {
 
     @Autowired
     RoleService roleService;
 
-    @RequestMapping(value = "",method = RequestMethod.POST)
+    @RequestMapping(value = Constant.PREFIX+"/login",method = RequestMethod.POST)
     @ResponseBody
     public ReturnMessage login(@RequestParam("username")String username,@RequestParam("password")String password){
 
-        Integer oldId = roleService.verify(username,password);
+        StringBuilder role = new StringBuilder();
+        Integer oldId = roleService.verify(username,password,role);
+        System.out.println(role.toString());
         if(oldId == -1){
             return ReturnMessage.passwordWrong();
         }else{
-            String token = JWTUtils.token(oldId,username) ;//role为保留功能，暂时没有设计
-            return ReturnMessage.success().add("token",token);
+            String token = JWTUtils.token(oldId,role.toString()) ;
+            return ReturnMessage.success().add("token",token).add("role",role.toString());
         }
 
+    }
+
+    @RequestMapping(value = Constant.PREFIX+"/hc",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnMessage checkToken(){
+        return ReturnMessage.success();
     }
 
 //    @RequestMapping(value = "/",method = RequestMethod.GET)
